@@ -1,0 +1,135 @@
+html, body {
+	font-family: 'Oswald', sans-serif;
+	background-color:#f00; 
+	padding:0px; 
+	margin:0px;
+	width:100%; 
+	height:100%;
+}
+a {
+	color: #666;
+	text-decoration: none;
+}
+.undob {
+	position:absolute;
+	top:0px;
+	right:0px;
+	width:10px;
+	height:10px;
+	margin-left:5px;
+	margin-top:5px;
+	margin-right:5px;
+	margin-bottom:0px;
+}
+.redob {
+	position:absolute;
+	top:10px;
+	right:0px;
+	width:10px;
+	height:10px;
+	margin-left:5px;
+	margin-top:0px;
+	margin-right:5px;
+	margin-bottom:5px;
+}
+.menub {
+	position:absolute;
+	top:20px;
+	right:0px;
+	width:10px;
+	height:10px;
+	margin-left:5px;
+	margin-top:5px;
+	margin-right:5px;
+	margin-bottom:5px;
+}
+
+.mainmenu {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	right: 0;
+	background-color: #eef;
+	overflow-x2: hidden;
+	overflow-y2: auto;
+	overflow: hidden;
+	transition: 0.5s;
+	margin: 0px;
+	padding:0px;
+	box-shadow: 0px 0px 0.3cm grey;
+	font-size: 0.75cm;
+}
+.menucontent {
+	margin: 0px;
+	padding:0px;
+	border-left-style1: solid;
+	border-left-color1: #abc;
+	border-left-width1: 1px;
+}
+.menuheader {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color:#abc;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	text-shadow2: 0 2px white;
+	font-size2: 1.5rem;
+	font-weight2: bold;
+	color2: #999999;
+	display2: flex;
+	justify-content2: center;
+	align-items2: center;
+}
+.menuelements {
+	margin-left: 0.2cm;
+	margin-right: 0.2cm;
+	padding:0px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	position: fixed;
+	z-index: 2;
+	height: 100%;
+	width: 6.8cm;
+}
+.buttonicon {
+	height: 1cm;
+	width:1cm;
+	vertical-align: middle;
+}
+.menubutton {
+	margin: 0;
+	padding-top:0.1cm;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color:#abc;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+
+}
+.menubuttonHead {
+	margin: 0;
+	padding-top:0.1cm;
+}
+.menubuttonRow {
+	margin: 0;
+	padding-top:0.1cm;
+	font-size: 75%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.menubuttonFoot {
+	margin: 0;
+	padding-top:0.1cm;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color:#abc;
+	font-size: 75%;
+}
+#filesOpen {
+	display: none;
+}

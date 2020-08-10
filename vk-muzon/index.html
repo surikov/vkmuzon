@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>VKMuzOn</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+		<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="index.css">
+		<script src="https://surikov.github.io/webaudiofont/npm/dist/WebAudioFontPlayer.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/0300_LesPaul_sf2_file.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/0280_LesPaul_sf2_file.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/0250_Chaos_sf2_file.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/0170_SBLive_sf2.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/0001_FluidR3_GM_sf2_file.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/0340_Aspirin_sf2_file.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/0390_GeneralUserGS_sf2_file.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/0490_Chaos_sf2_file.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/12835_0_Chaos_sf2_file.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/12838_22_FluidR3_GM_sf2_file.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/12841_26_JCLive_sf2_file.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/12842_26_JCLive_sf2_file.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/12845_26_JCLive_sf2_file.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/12846_26_JCLive_sf2_file.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/12849_26_JCLive_sf2_file.js"></script>
+		<script src="https://surikov.github.io/webaudiofontdata/sound/12851_26_JCLive_sf2_file.js"></script>
+		<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+		<script src="MIDIFile.js"></script>
+		<script src="index.js"></script>
+	</head>
+	<body>
+		<div><input type="file" id="filesOpen" name="files[]" multiple  /></div>
+		<div id="rakeDiv" style="width:100%; height:100%;  background-color:#0f0; overflow:hidden; padding:0px; margin:0px;" >
+			<div id="contentDiv" style="width:100%; height:100%; background-color:#000; padding:0px; margin:0px;" >
+				<svg id="contentSVG" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="padding:0px; margin:0px;">
+					<g id='contentGroup'>
+						<g id='counterGroup' ></g>
+						<g id='paneGroup' ></g>
+						<g id='linesGroup' ></g>
+						<g id='textGroup' ></g>
+						<g id='drumGroup' ></g>
+						<g id='track1Group' ></g>
+						<g id='track2Group' ></g>
+						<g id='track3Group' ></g>
+						<g id='track4Group' ></g>
+						<g id='track5Group' ></g>
+						<g id='track6Group' ></g>
+						<g id='track7Group' ></g>
+						<g id='track8Group' ></g>
+						<g id='upperGroup' ></g>
+					</g>
+				</svg>
+			</div>
+		</div>
+		
+		<div id="undobutton" class="undob" onclick='riffshareflat.undoLast();'><img id="undoimg" src='undo.png' width='100%' height='100%' /></div>
+		<div id="redobutton" class="redob" onclick='riffshareflat.redoNext();'><img id="redoimg" src='redo.png' width='100%' height='100%' /></div>
+		<!--
+		<div id='menuDiv1' class='mainmenu'>
+			<div class='menucontent1' id='subDivMenu'>
+				<div class='menuheader'>
+					<a href='javascript:void(0)' id='closeMenuB1' onclick='riffshareflat.closeMenuIns();'><img class='buttonicon' src='right.png' /><span id='menuTitle1'>Instrument</span></a>
+				</div>
+				<div class='menuelements' id='menuitems1'>
+					<div id='channel1' class='menubuttonRow'>1gnsgndrgb nrsn </div>
+					<div id='channel2' class='menubuttonRow'>2stgn drmnj dy</div>
+					<div id='channel3' class='menubuttonRow'>3dsrtyj dym</div>
+					<div id='channel4' class='menubuttonRow'>4dymnj drymg </div>
+					<div id='channel5' class='menubuttonRow'>5xd jdrgfmn </div>
+					<div id='channel6' class='menubuttonRow'>6xdrftgnj drtgfn </div>
+					<div id='channel7' class='menubuttonRow'>7xsdtgn dfgn</div>
+					<div id='channel8' class='menubuttonRow'>8xftgj xtygn </div>
+					<div id='allVolumes' class='menubuttonRow'>Drums</div>					
+					<div id='feelLabel' class='menubuttonRow'>feel</div>
+					<div id='tpnLabel' class='menubuttonRow'>tpn</div>
+					<div id='breaksLabel' class='menubuttonRow'>tpn</div>
+					<div id='clearSongB' class='menubuttonRow'>Clear song</div>
+					<div id='importSongB' class='menubuttonRow'>Merge MusicXML</div>
+					<div id='panelsMode' class='menubuttonRow'>Panels</div>
+				</div>
+			</div>
+		</div>
+		<div id='menuDiv2' class='mainmenu'>
+			<div class='menucontent2' id='subDivMenu'>
+				<div class='menuheader'>
+					<a href='javascript:void(0)' id='closeMenuB2' onclick='riffshareflat.closeMenuDrum();'><img class='buttonicon' src='right.png' /><span id='menuTitle2'>Drum</span></a>
+				</div>
+				<div class='menuelements' id='menuitems2'>
+					<div class='menubuttonRow'>&nbsp;</div>
+				</div>
+			</div>
+		</div>
+	-->
+		<script>
+			console.log('VKMuzOn v1.13');
+			startApp();
+			document.getElementById('filesOpen').addEventListener('change', openSong, false);
+			console.log('started');
+		</script>
+	</body>
+</html>
