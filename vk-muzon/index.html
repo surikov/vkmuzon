@@ -1,100 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>VKMuzOn</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="initial-scale=1.0, width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-		<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="index.css">
-		<script src="https://surikov.github.io/webaudiofont/npm/dist/WebAudioFontPlayer.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/0300_LesPaul_sf2_file.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/0280_LesPaul_sf2_file.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/0250_Chaos_sf2_file.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/0170_SBLive_sf2.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/0001_FluidR3_GM_sf2_file.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/0340_Aspirin_sf2_file.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/0390_GeneralUserGS_sf2_file.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/0490_Chaos_sf2_file.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/12835_0_Chaos_sf2_file.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/12838_22_FluidR3_GM_sf2_file.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/12841_26_JCLive_sf2_file.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/12842_26_JCLive_sf2_file.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/12845_26_JCLive_sf2_file.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/12846_26_JCLive_sf2_file.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/12849_26_JCLive_sf2_file.js"></script>
-		<script src="https://surikov.github.io/webaudiofontdata/sound/12851_26_JCLive_sf2_file.js"></script>
-		<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
-		<script src="MIDIFile.js"></script>
-		<script src="index.js"></script>
-	</head>
-	<body>
-		<div><input type="file" id="filesOpen" name="files[]" multiple  /></div>
-		<div id="rakeDiv" style="width:100%; height:100%;  background-color:#0f0; overflow:hidden; padding:0px; margin:0px;" >
-			<div id="contentDiv" style="width:100%; height:100%; background-color:#000; padding:0px; margin:0px;" >
-				<svg id="contentSVG" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="padding:0px; margin:0px;">
+
+<head>
+	<title>VKMuzOn</title>
+	<meta charset="utf-8">
+	<meta name="viewport"
+		content="initial-scale=1.0, width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+
+	<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<script src="https://surikov.github.io/webaudiofont/npm/dist/WebAudioFontPlayer.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/0300_LesPaul_sf2_file.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/0280_LesPaul_sf2_file.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/0250_Chaos_sf2_file.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/0170_SBLive_sf2.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/0001_FluidR3_GM_sf2_file.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/0340_Aspirin_sf2_file.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/0390_GeneralUserGS_sf2_file.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/0490_Chaos_sf2_file.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/12835_0_Chaos_sf2_file.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/12838_22_FluidR3_GM_sf2_file.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/12841_26_JCLive_sf2_file.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/12842_26_JCLive_sf2_file.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/12845_26_JCLive_sf2_file.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/12846_26_JCLive_sf2_file.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/12849_26_JCLive_sf2_file.js"></script>
+	<script src="https://surikov.github.io/webaudiofontdata/sound/12851_26_JCLive_sf2_file.js"></script>
+	<script src="https://unpkg.com/@vkontakte/vk-bridge/dist/browser.min.js"></script>
+
+	<script src="index.js"></script>
+	<script src="MIDIFile.js"></script>
+	<script src="edit.js"></script>
+</head>
+
+<body>
+	<div id='helpDiv'>
+		<h1><a href='#' onclick='switchEdit();'>VKMuzOn</a></h1>
+		<p><a href='https://vk.com/app7562667_95994542/edit.html'><span id='openmsg'>Открыть музыкальный
+					редактор</span></a></p>
+		<h1>Справка</h1>
+		<p>В этом музыкальном редакторе Вы можете создавать музыку вместе с друзьями.</p>
+		<p>Прочитайте <a href='#editDescription'>как добавлять</a> ноты, <a href='#sendDescription'>как делится</a>
+			своими шедеврами с друзьями, как добавлять мелодии из <a href='#importDescription'>файлов *.mid</a>.</p>
+		<p>Или <a href='#examplesDescription'>откройте примеры</a> с готовыми мелодиями.</p>
+		<h2 id='editDescription'>Редактирование</h2>
+		<p>Описание работы</p>
+		<p>Описание работы</p>
+		<p>Описание работы</p>
+		<p>Описание работы</p>
+		<p>Описание работы</p>
+		<p>Описание работы</p>
+		<p>Описание работы</p>
+		<p>Описание работы</p>
+		<p>Описание работы</p>
+		<p>Описание работы</p>
+		<p>Описание работы</p>
+		<p>Описание работы</p>
+		<p>Описание работы</p>
+		<p>Описание работы</p>
+		<p>Описание работы</p>
+		<h2 id='sendDescription'>Публикация</h2>
+		<p>Описание работы</p>
+		<h1 id='examplesDescription'>Примеры</h1>
+		<ul>
+			<li><a onclick='loadFromString("64-37333540-50a06420-0d0d0c05080d0f0a080c-000101010201030104010501060107014010411042104312441045104610471280118111821183118411851186118711a044a144a244a344a444a544a644a744c0ffc1ffc2ffc3ffc4ffc5ffc6ffc7ff-0010c19400020f1c400020f19400020f15400050209400060c2540014012140014011c40014011940014011540035010940044022140044021c40044021940044021540065020940074022140074021c400740219400740215400950109400a40321400a4031c400a40319400a40315400a50104400b50106400c10417400c50309400c60423401010b1a401020e1e401020e1a401020e15401050209401060b2640114012140114011e40114011a40114011540135010940144022140144021e40144021a40144021540165040940174022140174021e40174021a401740215401a40521401a4051e401a4051a401a40515401a50104401b50104401c10119401c50206401c60125401d10117401d60123401e50208401f10115401f6012140201031740202101c40202101940202101540205020940206032340214012140214011c40214011940214011540231021940235010940236022540244022140244021c402440219402440215402611a19402650309402661a2540274022140274021c402740219402740215402950109402a40521402a4051c402a40519402a40515402a50104402b40134402b40131402b4012d402b50106402c40334402c40331402c4032d402c50409402f40138402f40134402f4012f402f4012c40302101e40302101a40302101540304033840304033440304032f40304032c40305020940314012140314011e40314011a40314011540334013640334013240334012d40334012a40335020940344022140344021e40344021a40344021540344093640344093240344082d40344092a40365030940374022140374021e40374021a403740215403950109403a40521403a4051e403a4051a403a40515403a50204403c50206403e5020840");'
+					href='#'>Abba - Dancing Queen</a></li>
+			<li><a onclick='loadFromString("78-30040500-40a00500-0c0e0f06030f0e0d070c-0005010502010305040505050644071440104110421043104410451046114749a011a111a211a311a411a511a611a711-000020e40000021540005020440023020440025020440040020b400400212400450204400600409400600410400650204400850204400a0020b400a00212400a50204400c30204400c50204400e30204400e5020440100020e40100021540105020440123020440125020440140020b401400212401450204401600409401600410401650204401850204401a30204401a50204401c30204401c50204401e30204401e5020440200020e40200021540205020440223020440225020440240020b402400212402450204402600409402600410402650204402850204402a0060b402a00612402a50204402c50204402e5020440300080e40300081540305080740380030f403800316403850308403b00310403b00317403b50309403e30204403e5020440-000000000000000000000000-000000000000000000000000");'
+					href='#'>Accept - Balls to the Wall</a></li>
+
+		</ul>
+		<h1 id='importDescription'>Импорт</h1>
+		<p>Нажмите кнопку и выберите файл:</p>
+		<p><input type="file" id="filesOpen" name="files[]" multiple /></p>
+		<p>после этого откройте редактор и прослушайте полученную мелодию.</p>
+	</div>
+	<div id='editDiv'>
+
+		<div id="rakeDiv"
+			style="width:100%; height:100%;  background-color:#0f0; overflow:hidden; padding:0px; margin:0px;">
+			<div id="contentDiv" style="width:100%; height:100%; background-color:#000; padding:0px; margin:0px;">
+				<svg id="contentSVG" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"
+					xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" style="padding:0px; margin:0px;">
 					<g id='contentGroup'>
-						<g id='counterGroup' ></g>
-						<g id='paneGroup' ></g>
-						<g id='linesGroup' ></g>
-						<g id='textGroup' ></g>
-						<g id='drumGroup' ></g>
-						<g id='track1Group' ></g>
-						<g id='track2Group' ></g>
-						<g id='track3Group' ></g>
-						<g id='track4Group' ></g>
-						<g id='track5Group' ></g>
-						<g id='track6Group' ></g>
-						<g id='track7Group' ></g>
-						<g id='track8Group' ></g>
-						<g id='upperGroup' ></g>
+						<g id='counterGroup'></g>
+						<g id='paneGroup'></g>
+						<g id='linesGroup'></g>
+						<g id='textGroup'></g>
+						<g id='drumGroup'></g>
+						<g id='track1Group'></g>
+						<g id='track2Group'></g>
+						<g id='track3Group'></g>
+						<g id='track4Group'></g>
+						<g id='track5Group'></g>
+						<g id='track6Group'></g>
+						<g id='track7Group'></g>
+						<g id='track8Group'></g>
+						<g id='upperGroup'></g>
 					</g>
 				</svg>
 			</div>
 		</div>
-		
-		<div id="undobutton" class="undob" onclick='riffshareflat.undoLast();'><img id="undoimg" src='undo.png' width='100%' height='100%' /></div>
-		<div id="redobutton" class="redob" onclick='riffshareflat.redoNext();'><img id="redoimg" src='redo.png' width='100%' height='100%' /></div>
-		<!--
-		<div id='menuDiv1' class='mainmenu'>
-			<div class='menucontent1' id='subDivMenu'>
-				<div class='menuheader'>
-					<a href='javascript:void(0)' id='closeMenuB1' onclick='riffshareflat.closeMenuIns();'><img class='buttonicon' src='right.png' /><span id='menuTitle1'>Instrument</span></a>
-				</div>
-				<div class='menuelements' id='menuitems1'>
-					<div id='channel1' class='menubuttonRow'>1gnsgndrgb nrsn </div>
-					<div id='channel2' class='menubuttonRow'>2stgn drmnj dy</div>
-					<div id='channel3' class='menubuttonRow'>3dsrtyj dym</div>
-					<div id='channel4' class='menubuttonRow'>4dymnj drymg </div>
-					<div id='channel5' class='menubuttonRow'>5xd jdrgfmn </div>
-					<div id='channel6' class='menubuttonRow'>6xdrftgnj drtgfn </div>
-					<div id='channel7' class='menubuttonRow'>7xsdtgn dfgn</div>
-					<div id='channel8' class='menubuttonRow'>8xftgj xtygn </div>
-					<div id='allVolumes' class='menubuttonRow'>Drums</div>					
-					<div id='feelLabel' class='menubuttonRow'>feel</div>
-					<div id='tpnLabel' class='menubuttonRow'>tpn</div>
-					<div id='breaksLabel' class='menubuttonRow'>tpn</div>
-					<div id='clearSongB' class='menubuttonRow'>Clear song</div>
-					<div id='importSongB' class='menubuttonRow'>Merge MusicXML</div>
-					<div id='panelsMode' class='menubuttonRow'>Panels</div>
-				</div>
-			</div>
-		</div>
-		<div id='menuDiv2' class='mainmenu'>
-			<div class='menucontent2' id='subDivMenu'>
-				<div class='menuheader'>
-					<a href='javascript:void(0)' id='closeMenuB2' onclick='riffshareflat.closeMenuDrum();'><img class='buttonicon' src='right.png' /><span id='menuTitle2'>Drum</span></a>
-				</div>
-				<div class='menuelements' id='menuitems2'>
-					<div class='menubuttonRow'>&nbsp;</div>
-				</div>
-			</div>
-		</div>
-	-->
-		<script>
-			console.log('VKMuzOn v1.14');
-			startApp();
-			document.getElementById('filesOpen').addEventListener('change', openSong, false);
-			console.log('started');
-		</script>
-	</body>
+
+		<div id="undobutton" class="undob" onclick='riffshareflat.undoLast();'><img id="undoimg" src='undo.png'
+				width='100%' height='100%' /></div>
+		<div id="redobutton" class="redob" onclick='riffshareflat.redoNext();'><img id="redoimg" src='redo.png'
+				width='100%' height='100%' /></div>
+
+	</div>
+	<script>
+		console.log('VKMuzOn v1.25');
+		function switchEdit() {
+			document.getElementById('helpDiv').style.display = "none";
+			document.getElementById('editDiv').style.display = "inline";
+			//riffshareflat.saveState();
+			riffshareflat.init();
+		}
+		function switchHelp() {
+			document.getElementById('helpDiv').style.display = "inline";
+			document.getElementById('editDiv').style.display = "none";
+		}
+		switchHelp();
+		document.getElementById('filesOpen').addEventListener('change', openSong, false);
+		loadFromURL();
+		startApp();
+		console.log('started');
+	</script>
+</body>
+
 </html>

@@ -1,15 +1,34 @@
 html, body {
 	font-family: 'Oswald', sans-serif;
-	background-color:#f00; 
+	background-color:#abc; 
 	padding:0px; 
 	margin:0px;
 	width:100%; 
 	height:100%;
 }
 a {
-	color: #666;
-	text-decoration: none;
+	color: #039;
+	text-decoration: underline;
 }
+h1{
+	margin-left:0.5cm;
+	margin-top:1.5cm;
+	margin-right:0.5cm;
+	margin-bottom:0.25cm;
+}
+h2{
+	margin-left:0.5cm;
+	margin-top:0.25cm;
+	margin-right:0.5cm;
+	margin-bottom:0.25cm;
+}
+p{
+	margin-left:0.5cm;
+	margin-top:0.25cm;
+	margin-right:0.5cm;
+	margin-bottom:0.25cm;
+}
+
 .undob {
 	position:absolute;
 	top:0px;
@@ -130,6 +149,6 @@ a {
 	border-bottom-color:#abc;
 	font-size: 75%;
 }
-#filesOpen {
+#filesOpen111 {
 	display: none;
 }

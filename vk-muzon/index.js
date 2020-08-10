@@ -1,6 +1,13 @@
-disableSaveState=false;
+disableSaveState = false;
 function startApp() {
 	console.log('startApp');
+	window.onload = function () {
+		//console.log('create riffshareflat');
+		new RiffShareFlat();
+
+		riffshareflat.init();
+
+	};
 	vkBridge.send('VKWebAppInit').then(data => {
 		console.log('vkBridge data', data);
 	})
@@ -229,6 +236,9 @@ function decodeState(encoded) {
 		var strings = encoded.split('-');
 		var tempo = parseInt(strings[0], 16);
 		//console.log('tempo',tempo);
+		//var t=[80, 100, 120, 140, 160, 180, 200, 220, 240];
+
+		//var tempo = 1 * sureInList(readTextFromlocalStorage('tempo'), 120, [80, 100, 120, 140, 160, 180, 200, 220, 240]);
 		saveText2localStorage('tempo', '' + tempo);
 		for (var i = 0; i < 8; i++) {
 			var n = 10 * parseInt(strings[1].substring(i, i + 1), 16);
@@ -1162,7 +1172,7 @@ RiffShareFlat.prototype.loadStorageState = function () {
 	this.resetAllLayersNow();
 };
 RiffShareFlat.prototype.saveState = function () {
-	if(disableSaveState){
+	if (disableSaveState) {
 		console.log('no saveState');
 		return;
 	}
@@ -1990,9 +2000,9 @@ RiffShareFlat.prototype.addSmallTiles = function (left, top, width, height) {
 				}
 			}
 			//var url = "https://zvoog.app/x/share.php?top=" + top + "&mode=" + me.bgMode + "&riff=" + encoded;
-			var url = "https://vk.com/app7562667_95994542/#" + top + "&mode=" + me.bgMode + "&riff=" + encoded;
+			var url = "https://vk.com/app7562667_95994542/#" + encoded;
 			//window.open(url, '_self')
-			//console.log(me.trackInfo,url);
+			console.log(url, url);
 			//bridge.send("VKWebAppShowWallPostBox", { "message": "Hello!" });
 			vkBridge.send('VKWebAppShowWallPostBox', { "message": "Открыть в VKMuzOn " + url }).then(data => {
 				console.log('vkBridge data', data);
@@ -2001,20 +2011,22 @@ RiffShareFlat.prototype.addSmallTiles = function (left, top, width, height) {
 					console.log('vkBridge error', error);
 				});
 		});
-
-		this.tileCircle(g, 13 * this.tapSize, 17 * this.tapSize, 1 * this.tapSize, modeDrumShadow(this.bgMode));
-		this.tileText(g, 12.75 * this.tapSize, 17.75 * this.tapSize, 1.5 * this.tapSize, 'Помощь', modeDrumColor(this.bgMode));
-		this.addSpot('helpshareriff', 12 * this.tapSize, 16 * this.tapSize, 7 * this.tapSize, this.tapSize * 2, function () {
-			riffshareflat.saveState();
-			window.open('help.html', '_self')
-		});
-
+		/*
+				this.tileCircle(g, 13 * this.tapSize, 17 * this.tapSize, 1 * this.tapSize, modeDrumShadow(this.bgMode));
+				this.tileText(g, 12.75 * this.tapSize, 17.75 * this.tapSize, 1.5 * this.tapSize, 'Помощь', modeDrumColor(this.bgMode));
+				this.addSpot('helpshareriff', 12 * this.tapSize, 16 * this.tapSize, 7 * this.tapSize, this.tapSize * 2, function () {
+					riffshareflat.saveState();
+					window.open('index.html', '_self')
+				});
+		*/
 		this.tileCircle(g, 4 * this.tapSize, 15 * this.tapSize, 3 * this.tapSize, modeDrumShadow(this.bgMode));
-		this.tileText(g, 3 * this.tapSize, y + this.tapSize * 17, 2 * this.tapSize, 'Импорт', modeDrumColor(this.bgMode));
+		this.tileText(g, 3 * this.tapSize, y + this.tapSize * 17, 3 * this.tapSize, 'Помощь', modeDrumColor(this.bgMode));
 		this.addSpot('flop', 0, 12 * this.tapSize, 6 * this.tapSize, this.tapSize * 6, function () {
 			riffshareflat.saveState();
 			//window.open('file.html', '_self')
-			promptFile();
+			//promptFile();
+			//window.open('index.html', '_self')
+			switchHelp();
 		});
 		this.tileCircle(g, 3 * this.tapSize, 21 * this.tapSize, 2 * this.tapSize, modeDrumShadow(this.bgMode));
 		this.tileText(g, 2.5 * this.tapSize, y + this.tapSize * 22, 2 * this.tapSize, 'Удалить всё', modeDrumColor(this.bgMode));
@@ -3740,66 +3752,68 @@ RiffShareFlat.prototype.midiNoteOff = function (pitch) {
 		this.midiKeys[pitch].cancel();
 	}
 };
+function loadFromString(riff) {
+	addStateToHistory();
+	saveObject2localStorage('storeDrums', []);
+	saveObject2localStorage('storeTracks', []);
+	decodeState(riff);
+	//window.location = "https://vk.com/app7562667_95994542/";
+
+	document.getElementById('openmsg').innerHTML = 'Открыть мелодию в музыкальном редакторе';
+	window.scrollTo(0, 0);
+}
 function loadFromURL() {
 	//var riff = getUrlVars()['riff'];
 	var riff = window.location.hash.substr(1);
 	//console.log('location.href', location.href);
 	//console.log('riff', riff);
 	if (riff) {
-		addStateToHistory();
-		saveObject2localStorage('storeDrums', []);
-		saveObject2localStorage('storeTracks', []);
-		decodeState(riff);
-		window.location = "https://vk.com/app7562667_95994542/";
+		if (riff.length > 22) {
+			loadFromString(riff);
+		}
 	}
 }
 //https://surikov.github.io/RiffShareAndroid/app/src/main/assets/load.html?riff=78-00000055-50806070-0d0c0b10080b0d0e070c-000301fe030e048305ff060107564010411142114311441145114611471180fe81ff82fe83ff84fe85ff86fe87ffc00fc7ee-006021d40007020540046022040047020540076021d40077020340096021d400970203400a60222400a70200400c6021d400c70200400e6021b400e7020340106021d40107020540146022440147020540176021d40196021d401970200401a60225401a70200401c60224401c70203401e60220401e7020540206021d40207020140226022440246022940247020140266021d40276021b40277020340296021b402970203402a60218402a70200402c6021f402c70203402e60b1d402e70205403070205403970203403a70200403c7020a403e7020840
 //https://vk.com/app7562667_95994542#78-00000055-50806070-0d0c0b10080b0d0e070c-000301fe030e048305ff060107564010411142114311441145114611471180fe81ff82fe83ff84fe85ff86fe87ffc00fc7ee-006021d40007020540046022040047020540076021d40077020340096021d400970203400a60222400a70200400c6021d400c70200400e6021b400e7020340106021d40107020540146022440147020540176021d40196021d401970200401a60225401a70200401c60224401c70203401e60220401e7020540206021d40207020140226022440246022940247020140266021d40276021b40277020340296021b402970203402a60218402a70200402c6021f402c70203402e60b1d402e70205403070205403970203403a70200403c7020a403e7020840		
 //file:///C:/sss/GitHub/vkmuzon/vk-muzon/index.html?one=second#78-00000055-50806070-0d0c0b10080b0d0e070c-000301fe030e048305ff060107564010411142114311441145114611471180fe81ff82fe83ff84fe85ff86fe87ffc00fc7ee-006021d40007020540046022040047020540076021d40077020340096021d400970203400a60222400a70200400c6021d400c70200400e6021b400e7020340106021d40107020540146022440147020540176021d40196021d401970200401a60225401a70200401c60224401c70203401e60220401e7020540206021d40207020140226022440246022940247020140266021d40276021b40277020340296021b402970203402a60218402a70200402c6021f402c70203402e60b1d402e70205403070205403970203403a70200403c7020a403e7020840		
-window.onload = function () {
-	//console.log('create riffshareflat');
-	new RiffShareFlat();
-	loadFromURL();
-	riffshareflat.init();
 
-};
 function promptFile() {
 	//console.log('promptFile');
 	document.getElementById("filesOpen").click();
 }
-function adjustPitch(pitch){
-	var p=1*pitch-12*3;
-	if(p<0){
-		while(p<0){
-			p=p+12;
+function adjustPitch(pitch) {
+	var p = 1 * pitch - 12 * 3;
+	if (p < 0) {
+		while (p < 0) {
+			p = p + 12;
 		}
 	}
-	if(p>=5*12){
-		while(p>=5*12){
-			p=p-12;
+	if (p >= 5 * 12) {
+		while (p >= 5 * 12) {
+			p = p - 12;
 		}
 	}
 	return p;
 }
-function noDrum(drums,d,b){
-	for(var i=0;i<drums.length;i++){
-		if(drums[i].drum==d && drums[i].beat==b){
+function noDrum(drums, d, b) {
+	for (var i = 0; i < drums.length; i++) {
+		if (drums[i].drum == d && drums[i].beat == b) {
 			return false;
 		}
 	}
 	return true;
 }
-function noTone(tones,t,b,p){
+function noTone(tones, t, b, p) {
 	//console.log(tones);
-	for(var i=0;i<tones.length;i++){//console.log(tones,t,b,p);
-		if(tones[i].track==t && tones[i].beat==b && tones[i].pitch==p){
+	for (var i = 0; i < tones.length; i++) {//console.log(tones,t,b,p);
+		if (tones[i].track == t && tones[i].beat == b && tones[i].pitch == p) {
 			return false;
 		}
 	}
 	return true;
 }
 function openSong(evt) {
-	//console.log("openSong v2", evt);
+	console.log("openSong v2", evt);
 	//console.log(encodeState());
 	var skp = 0;//1 * document.getElementById("skip16").value;
 
@@ -3905,9 +3919,10 @@ function openSong(evt) {
 				}
 				saveObject2localStorage('storeDrums', storeDrums);
 				//console.log('storeDrums', storeDrums)
-				disableSaveState=true;
+				disableSaveState = true;
 				//window.location='index.html';
-				window.location = "https://vk.com/app7562667_95994542/";
+				//window.location = "https://vk.com/app7562667_95994542/";
+				window.scrollTo(0, 0);
 				/*
 				var midiParser = new MidiParser(arrayBuffer);
 				midiParser.parse();
@@ -3966,4 +3981,5 @@ function openSong(evt) {
 		fileReader.readAsArrayBuffer(file);
 	}
 }
+
 
