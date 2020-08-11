@@ -1,16 +1,16 @@
-disableSaveState = false;
+//disableSaveState = false;
 function startApp() {
 	console.log('startApp');
-	window.onload = function () {
+	/*window.onload = function () {
 		//console.log('create riffshareflat');
 		new RiffShareFlat();
 
-		riffshareflat.init();
+		//riffshareflat.init();
 
-	};
+	};*/
 	vkBridge.send('VKWebAppInit').then(data => {
-		console.log('vkBridge data', data);
-	})
+			console.log('vkBridge data', data);
+		})
 		.catch(error => {
 			console.log('vkBridge error', error);
 		});
@@ -43,6 +43,7 @@ function readStringFromWebDB(name, ondone) {
 		ondone(null);
 	}
 }
+
 function saveString2WebDB(name, text, ondone) {
 	try {
 		var database = getWebDB();
@@ -61,6 +62,7 @@ function saveString2WebDB(name, text, ondone) {
 		ondone();
 	}
 }
+
 function saveString2IndexedDB(name, text, ondone) {
 	try {
 		doStoreIndexedDB(function (idbObjectStore) {
@@ -71,6 +73,7 @@ function saveString2IndexedDB(name, text, ondone) {
 		ondone(null);
 	}
 }
+
 function readStringFromIndexedDB(name, ondone) {
 	try {
 		doStoreIndexedDB(function (idbObjectStore) {
@@ -81,10 +84,12 @@ function readStringFromIndexedDB(name, ondone) {
 		ondone(null);
 	}
 }
+
 function getWebDB() {
 	var database = window.openDatabase('websql', 1, 'CfgDB', 256 * 1024);
 	return database;
 }
+
 function doStoreIndexedDB(ondone) {
 	try {
 		var idbFactory = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
@@ -113,6 +118,7 @@ function doStoreIndexedDB(ondone) {
 		ondone(null);
 	}
 }
+
 function saveString2ObjectStore(idbObjectStore, name, text, ondone) {
 	try {
 		var idbRequest = idbObjectStore.delete(name);
@@ -140,6 +146,7 @@ function saveString2ObjectStore(idbObjectStore, name, text, ondone) {
 		ondone();
 	}
 }
+
 function readStringFromObjectStore(idbObjectStore, name, ondone) {
 	try {
 		var idbRequest = idbObjectStore.get(name);
@@ -162,6 +169,7 @@ function saveObject2localStorage(name, o) {
 	//console.log(disableSave,'saveObject2localStorage', name, o);
 	localStorage.setItem(name, JSON.stringify(o));
 }
+
 function readObjectFromlocalStorage(name) {
 	var o = null;
 	try {
@@ -172,10 +180,12 @@ function readObjectFromlocalStorage(name) {
 	}
 	return o;
 }
+
 function saveText2localStorage(name, text) {
 	//console.log('saveText2localStorage', name, text);
 	localStorage.setItem(name, text);
 }
+
 function readTextFromlocalStorage(name) {
 	var o = '';
 	try {
@@ -185,6 +195,7 @@ function readTextFromlocalStorage(name) {
 	}
 	return o;
 }
+
 function sureArray(v, defaultValue) {
 	if (v) {
 		if (v.length > 0) {
@@ -196,6 +207,7 @@ function sureArray(v, defaultValue) {
 		return defaultValue;
 	}
 }
+
 function sureNumeric(v, minValue, defaultValue, maxValue) {
 	var r = defaultValue;
 	try {
@@ -214,6 +226,7 @@ function sureNumeric(v, minValue, defaultValue, maxValue) {
 	}
 	return r;
 }
+
 function sureInList(v, defaultValue, items) {
 	var r = defaultValue;
 	for (var i = 0; i < items.length; i++) {
@@ -223,6 +236,7 @@ function sureInList(v, defaultValue, items) {
 	}
 	return r;
 }
+
 function getUrlVars() {
 	var vars = {};
 	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) {
@@ -230,6 +244,7 @@ function getUrlVars() {
 	});
 	return vars;
 }
+
 function decodeState(encoded) {
 	try {
 		//addStateToHistory();
@@ -350,12 +365,14 @@ function decodeState(encoded) {
 	}
 	//vvv.rfff();
 }
+
 function pad0(value, size) {
 	for (var i = value.length; i < size; i++) {
 		value = '0' + value;
 	}
 	return value;
 }
+
 function encodeState() {
 	var txt = '';
 	try {
@@ -439,6 +456,7 @@ function encodeState() {
 	//console.log(txt);
 	return txt;
 }
+
 function hex3(n) {
 	var nn = 1 * n;
 	var s = nn.toString(16);
@@ -450,6 +468,7 @@ function hex3(n) {
 	}
 	return s;
 }
+
 function addStateToHistory(nocut) {
 	var hstry = sureArray(readObjectFromlocalStorage('history'), []);
 	var state = {};
@@ -476,6 +495,7 @@ function addStateToHistory(nocut) {
 	}
 	saveObject2localStorage('history', hstry);
 }
+
 function removeStateFromHistory(n) {
 	var hstry = sureArray(readObjectFromlocalStorage('history'), []);
 	if (hstry.length > n) {
@@ -502,18 +522,21 @@ function modeDrumColor(bgMode) {
 	}
 	return '#ccc';
 }
+
 function modeDrumShadow(bgMode) {
 	if (bgMode == 2) {
 		return '#9a9';
 	}
 	return '#566';
 }
+
 function modeNoteName(bgMode) {
 	if (bgMode == 0) {
 		return '#000';
 	}
 	return '#fff';
 }
+
 function modeBackground(bgMode) {
 	if (bgMode == 1) {
 		return '#31424C';
@@ -541,9 +564,11 @@ function midiOnMIDImessage(event) {
 			break;
 	}
 }
+
 function midiOnStateChange(event) {
 	//console.log('midiOnStateChange', event);
 }
+
 function requestMIDIAccessSuccess(midi) {
 	var inputs = midi.inputs.values();
 	for (var input = inputs.next(); input && !input.done; input = inputs.next()) {
@@ -552,9 +577,11 @@ function requestMIDIAccessSuccess(midi) {
 	}
 	midi.onstatechange = midiOnStateChange;
 }
+
 function requestMIDIAccessFailure(e) {
 	//console.log('requestMIDIAccessFailure', e);
 }
+
 function startListenMIDI() {
 	if (navigator.requestMIDIAccess) {
 		//console.log('navigator.requestMIDIAccess ok');
@@ -563,11 +590,13 @@ function startListenMIDI() {
 		console.log('navigator.requestMIDIAccess failed', e);
 	}
 }
+
 function RiffShareFlat() {
 	window.riffshareflat = this;
 	return this;
 }
 RiffShareFlat.prototype.init = function () {
+	console.log('init');
 	this.tapSize = 32;
 	try {
 		//console.log('window.devicePixelRatio', window.devicePixelRatio);
@@ -706,114 +735,113 @@ RiffShareFlat.prototype.init = function () {
 		id: 7,
 		volumeRatio: 0.3,
 		length: 2
-	}
-	];
+	}];
 	this.trackInfo = [{
-		color: 'rgb(255,127,77)',
-		shadow: 'rgba(255,127,77,0.4)',
-		//color: 'rgba(255,204,187,1)',
-		//shadow: 'rgba(255,204,187,0.4)',
-		title: 'Синтезатор',
-		order: 2,
-		sound: _tone_0390_GeneralUserGS_sf2_file,
-		volume: sureNumeric(readObjectFromlocalStorage('track7'), 0, 70, 100),
-		nn: 7,
-		octave: 3,
-		inChordDelay: 0.01,
-		volumeRatio: 0.5
-	}, {
-		color: 'rgb(178,178,0)',
-		shadow: 'rgba(178,178,0,0.4)',
-		//color: 'rgba(204,153,0,1)',
-		//shadow: 'rgba(204,153,0,0.4)',
-		title: 'Струнные',
-		order: 1,
-		sound: _tone_0490_Chaos_sf2_file,
-		volume: sureNumeric(readObjectFromlocalStorage('track6'), 0, 70, 100),
-		nn: 6,
-		octave: 3,
-		inChordDelay: 0,
-		volumeRatio: 0.3
-	}, {
-		color: 'rgb(140,0,64)',
-		shadow: 'rgba(140,0,64,0.4)',
-		//color: 'rgba(204,0,204,1)',
-		//shadow: 'rgba(204,0,204,0.4)',
-		title: 'Бас-гитара',
-		order: 5,
-		sound: _tone_0340_Aspirin_sf2_file,
-		volume: sureNumeric(readObjectFromlocalStorage('track5'), 0, 70, 100),
-		nn: 5,
-		octave: 2,
-		inChordDelay: 0.01,
-		volumeRatio: 0.75
-	}, {
-		color: 'rgb(0,127,255)',
-		shadow: 'rgba(0,127,255,0.4)',
-		//color: 'rgba(00,153,255,1)',
-		//shadow: 'rgba(00,153,255,0.4)',
-		title: 'Пианино',
-		order: 3,
-		sound: _tone_0001_FluidR3_GM_sf2_file,
-		volume: sureNumeric(readObjectFromlocalStorage('track4'), 0, 70, 100),
-		nn: 4,
-		octave: 3,
-		inChordDelay: 0,
-		volumeRatio: 0.5
-	}, {
-		color: 'rgb(140,35,0)',
-		shadow: 'rgba(140,35,0,0.4)',
-		//color: 'rgba(153,51,0,1)',
-		//shadow: 'rgba(153,51,0,0.4)',
-		title: 'Мьют-дисторшн',
-		order: 4,
-		sound: _tone_0280_LesPaul_sf2_file,
-		volume: sureNumeric(readObjectFromlocalStorage('track3'), 0, 70, 100),
-		nn: 3,
-		octave: 3,
-		inChordDelay: 0,
-		volumeRatio: 1.0
-	}, {
-		color: 'rgb(35,51,255)',
-		shadow: 'rgba(35,51,255,0.4)',
-		//color: 'rgba(51,51,255,1)',
-		//shadow: 'rgba(51,51,255,0.4)',
-		title: 'Синт. орган',
-		order: 0,
-		inChordDelay: 0,
-		sound: _tone_0170_SBLive_sf2,
-		//sound: _tone_0170_JCLive_sf2_file,
-		volume: sureNumeric(readObjectFromlocalStorage('track2'), 0, 70, 100),
-		nn: 2,
-		octave: 4,
-		volumeRatio: 0.7
-	}, {
-		color: 'rgb(45,178,0)',
-		shadow: 'rgba(45,178,0,0.4)',
-		//color: 'rgba(0,153,0,1)',
-		//shadow: 'rgba(0,153,0,0.4)',
-		title: 'Аккуст. гитара',
-		order: 6,
-		sound: _tone_0250_Chaos_sf2_file,
-		volume: sureNumeric(readObjectFromlocalStorage('track1'), 0, 70, 100),
-		nn: 1,
-		octave: 3,
-		inChordDelay: 0.01,
-		volumeRatio: 0.5
-	}, {
-		color: 'rgb(255,0,0)',
-		shadow: 'rgba(255,0,0,0.4)',
-		//color: 'rgba(255,0,0,1)',
-		//shadow: 'rgba(255,0,0,0.4)',
-		title: 'Гитара-дисторшн',
-		order: 7,
-		sound: _tone_0300_LesPaul_sf2_file,
-		volume: sureNumeric(readObjectFromlocalStorage('track0'), 0, 70, 100),
-		nn: 0,
-		octave: 3,
-		inChordDelay: 0.01,
-		volumeRatio: 0.7
-	}
+			color: 'rgb(255,127,77)',
+			shadow: 'rgba(255,127,77,0.4)',
+			//color: 'rgba(255,204,187,1)',
+			//shadow: 'rgba(255,204,187,0.4)',
+			title: 'Синтезатор',
+			order: 2,
+			sound: _tone_0390_GeneralUserGS_sf2_file,
+			volume: sureNumeric(readObjectFromlocalStorage('track7'), 0, 70, 100),
+			nn: 7,
+			octave: 3,
+			inChordDelay: 0.01,
+			volumeRatio: 0.5
+		}, {
+			color: 'rgb(178,178,0)',
+			shadow: 'rgba(178,178,0,0.4)',
+			//color: 'rgba(204,153,0,1)',
+			//shadow: 'rgba(204,153,0,0.4)',
+			title: 'Струнные',
+			order: 1,
+			sound: _tone_0490_Chaos_sf2_file,
+			volume: sureNumeric(readObjectFromlocalStorage('track6'), 0, 70, 100),
+			nn: 6,
+			octave: 3,
+			inChordDelay: 0,
+			volumeRatio: 0.3
+		}, {
+			color: 'rgb(140,0,64)',
+			shadow: 'rgba(140,0,64,0.4)',
+			//color: 'rgba(204,0,204,1)',
+			//shadow: 'rgba(204,0,204,0.4)',
+			title: 'Бас-гитара',
+			order: 5,
+			sound: _tone_0340_Aspirin_sf2_file,
+			volume: sureNumeric(readObjectFromlocalStorage('track5'), 0, 70, 100),
+			nn: 5,
+			octave: 2,
+			inChordDelay: 0.01,
+			volumeRatio: 0.75
+		}, {
+			color: 'rgb(0,127,255)',
+			shadow: 'rgba(0,127,255,0.4)',
+			//color: 'rgba(00,153,255,1)',
+			//shadow: 'rgba(00,153,255,0.4)',
+			title: 'Пианино',
+			order: 3,
+			sound: _tone_0001_FluidR3_GM_sf2_file,
+			volume: sureNumeric(readObjectFromlocalStorage('track4'), 0, 70, 100),
+			nn: 4,
+			octave: 3,
+			inChordDelay: 0,
+			volumeRatio: 0.5
+		}, {
+			color: 'rgb(140,35,0)',
+			shadow: 'rgba(140,35,0,0.4)',
+			//color: 'rgba(153,51,0,1)',
+			//shadow: 'rgba(153,51,0,0.4)',
+			title: 'Мьют-дисторшн',
+			order: 4,
+			sound: _tone_0280_LesPaul_sf2_file,
+			volume: sureNumeric(readObjectFromlocalStorage('track3'), 0, 70, 100),
+			nn: 3,
+			octave: 3,
+			inChordDelay: 0,
+			volumeRatio: 1.0
+		}, {
+			color: 'rgb(35,51,255)',
+			shadow: 'rgba(35,51,255,0.4)',
+			//color: 'rgba(51,51,255,1)',
+			//shadow: 'rgba(51,51,255,0.4)',
+			title: 'Синт. орган',
+			order: 0,
+			inChordDelay: 0,
+			sound: _tone_0170_SBLive_sf2,
+			//sound: _tone_0170_JCLive_sf2_file,
+			volume: sureNumeric(readObjectFromlocalStorage('track2'), 0, 70, 100),
+			nn: 2,
+			octave: 4,
+			volumeRatio: 0.7
+		}, {
+			color: 'rgb(45,178,0)',
+			shadow: 'rgba(45,178,0,0.4)',
+			//color: 'rgba(0,153,0,1)',
+			//shadow: 'rgba(0,153,0,0.4)',
+			title: 'Аккуст. гитара',
+			order: 6,
+			sound: _tone_0250_Chaos_sf2_file,
+			volume: sureNumeric(readObjectFromlocalStorage('track1'), 0, 70, 100),
+			nn: 1,
+			octave: 3,
+			inChordDelay: 0.01,
+			volumeRatio: 0.5
+		}, {
+			color: 'rgb(255,0,0)',
+			shadow: 'rgba(255,0,0,0.4)',
+			//color: 'rgba(255,0,0,1)',
+			//shadow: 'rgba(255,0,0,0.4)',
+			title: 'Гитара-дисторшн',
+			order: 7,
+			sound: _tone_0300_LesPaul_sf2_file,
+			volume: sureNumeric(readObjectFromlocalStorage('track0'), 0, 70, 100),
+			nn: 0,
+			octave: 3,
+			inChordDelay: 0.01,
+			volumeRatio: 0.7
+		}
 
 	];
 
@@ -1010,10 +1038,11 @@ RiffShareFlat.prototype.init = function () {
 	this.echoOn = false;
 	try {
 		var usrAgnt = navigator.userAgent || navigator.vendor || window.opera;
-		if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i//
+		if (/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino|android|ipad|playbook|silk/i //
 			.test(usrAgnt) //
-			|| /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i//
-				.test(usrAgnt.substr(0, 4))) {
+			||
+			/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i //
+			.test(usrAgnt.substr(0, 4))) {
 			this.echoOn = false;
 			document.title = 'Mobile VKMuzOn';
 		} else {
@@ -1051,7 +1080,7 @@ RiffShareFlat.prototype.init = function () {
 	this.loadState();
 
 	//console.log('done init');
-	startListenMIDI();
+	//startListenMIDI();
 };
 RiffShareFlat.prototype.loadState = function () {
 	var me = this;
@@ -1172,11 +1201,17 @@ RiffShareFlat.prototype.loadStorageState = function () {
 	this.resetAllLayersNow();
 };
 RiffShareFlat.prototype.saveState = function () {
-	if (disableSaveState) {
+	/*if (disableSaveState) {
 		console.log('no saveState');
 		return;
+	}*/
+	if (this.player) {
+		console.log('saveState');
+	}else{
+		console.log('skip saveState');
+		return;
 	}
-	console.log('saveState');
+	
 	this.stopPlay();
 	var fullState = {};
 	var flatstate = {
@@ -1306,7 +1341,8 @@ RiffShareFlat.prototype.rakeMouseUp = function (mouseEvent) {
 	mouseEvent.preventDefault();
 	riffshareflat.rakeDiv.removeEventListener('mousemove', riffshareflat.rakeMouseMove, true);
 	if (Math.abs(riffshareflat.clickX - mouseEvent.clientX) < riffshareflat.translateZ * riffshareflat.tapSize / 8 //
-		&& Math.abs(riffshareflat.clickY - mouseEvent.clientY) < riffshareflat.translateZ * riffshareflat.tapSize / 8) {
+		&&
+		Math.abs(riffshareflat.clickY - mouseEvent.clientY) < riffshareflat.translateZ * riffshareflat.tapSize / 8) {
 		riffshareflat.click();
 	}
 	riffshareflat.adjustContentPosition();
@@ -1387,7 +1423,8 @@ RiffShareFlat.prototype.rakeTouchEnd = function (touchEvent) {
 		if (touchEvent.touches.length < 2) {
 			if (riffshareflat.startedTouch) {
 				if (Math.abs(riffshareflat.clickX - riffshareflat.startMouseScreenX) < riffshareflat.translateZ * riffshareflat.tapSize / 8 //
-					&& Math.abs(riffshareflat.clickY - riffshareflat.startMouseScreenY) < riffshareflat.translateZ * riffshareflat.tapSize / 8) {
+					&&
+					Math.abs(riffshareflat.clickY - riffshareflat.startMouseScreenY) < riffshareflat.translateZ * riffshareflat.tapSize / 8) {
 					riffshareflat.click();
 				}
 			} else {
@@ -1820,9 +1857,12 @@ RiffShareFlat.prototype.moveBeatCounter = function () {
 
 RiffShareFlat.prototype.stopPlay = function () {
 	this.onAir = false;
-	clearTimeout(this.tickID);
-	this.player.cancelQueue(this.audioContext);
-	this.resetAllLayersNow();
+	
+	if (this.player) {
+		clearTimeout(this.tickID);
+		this.player.cancelQueue(this.audioContext);
+		this.resetAllLayersNow();
+	}
 };
 RiffShareFlat.prototype.resetNodeValues = function () {
 	for (var i = 0; i < 8; i++) {
@@ -1938,8 +1978,7 @@ RiffShareFlat.prototype.sendNextBeats = function (when, startBeat, endBeat) {
 		var shift = [{
 			when: note.length * beatLen,
 			pitch: note.shift + channel.octave * 12 + note.pitch
-		}
-		];
+		}];
 		var r = 0.6 - Math.random() * 0.2;
 		//this.player.queueWaveTable(this.audioContext, channel.audioNode, channel.sound, when + beatLen * (note.beat - startBeat) + inChordCount * channel.inChordDelay, channel.octave * 12 + note.pitch, 0.075 + note.length * beatLen, r * channel.volumeRatio, shift);
 		this.player.queueWaveTable(this.audioContext, channel.audioNode, zones, when + beatLen * (note.beat - startBeat) + inChordCount * channel.inChordDelay, channel.octave * 12 + note.pitch, 0.075 + note.length * beatLen, r * channel.volumeRatio, shift);
@@ -2004,9 +2043,11 @@ RiffShareFlat.prototype.addSmallTiles = function (left, top, width, height) {
 			//window.open(url, '_self')
 			console.log(url, url);
 			//bridge.send("VKWebAppShowWallPostBox", { "message": "Hello!" });
-			vkBridge.send('VKWebAppShowWallPostBox', { "message": "Открыть в VKMuzOn " + url }).then(data => {
-				console.log('vkBridge data', data);
-			})
+			vkBridge.send('VKWebAppShowWallPostBox', {
+					"message": "Открыть в VKMuzOn " + url
+				}).then(data => {
+					console.log('vkBridge data', data);
+				})
 				.catch(error => {
 					console.log('vkBridge error', error);
 				});
@@ -2036,7 +2077,7 @@ RiffShareFlat.prototype.addSmallTiles = function (left, top, width, height) {
 
 		this.tileCircle(g, 7 * this.tapSize, 52 * this.tapSize, 0.5 * this.tapSize, this.findTrackInfo(0).color);
 		//this.tileText(g, 7 * this.tapSize, y + this.tapSize * 52.3, this.tapSize * 1.0, 'Swap with ' + this.findTrackInfo(1).title, this.findTrackInfo(1).color);
-		this.tileText(g, 7 * this.tapSize, y + this.tapSize * 52.3, this.tapSize * 0.75, 'Сменит на ' + this.findTrackTitle(this.findTrackNum(1)), this.findTrackInfo(1).color);
+		this.tileText(g, 7 * this.tapSize, y + this.tapSize * 52.3, this.tapSize * 0.75, 'Сменить на ' + this.findTrackTitle(this.findTrackNum(1)), this.findTrackInfo(1).color);
 
 		this.addSpot('swp', 6.5 * this.tapSize, 51.5 * this.tapSize, (this.marginLeft - 7.5) * this.tapSize, this.tapSize, function () {
 			//console.log(riffshareflat.findTrackInfo(0).title,'<->',riffshareflat.findTrackInfo(1).title);
@@ -2149,7 +2190,7 @@ RiffShareFlat.prototype.addSmallTiles = function (left, top, width, height) {
 
 			var bx = (16 * i + this.marginLeft + 15.5) * this.tapSize;
 			/*
-			*/
+			 */
 
 			var by = 0.5 * this.tapSize;
 			this.tileCircle(g, bx, by, 0.5 * this.tapSize, this.findTrackInfo(0).color);
@@ -2630,13 +2671,13 @@ RiffShareFlat.prototype.tileToneVolumes = function (left, top, width, height) {
 			} else {
 				this.tileRectangle(g, x + this.tapSize * (0 + 6), y + this.tapSize * (i + sk), this.tapSize * 11, this.tapSize * 0.9, modeDrumShadow(this.bgMode));
 				this.tileRectangle(g, x + this.tapSize * 6, y + this.tapSize * (i + sk), this.tapSize * (1 + track.volume / 10), this.tapSize * 0.9, track.color);
-				this.tileCircle(g, x + this.tapSize * 1, y + this.tapSize * (i + 0.5 + sk), this.tapSize * 0.5, modeDrumShadow(this.bgMode));
+				//this.tileCircle(g, x + this.tapSize * 1, y + this.tapSize * (i + 0.5 + sk), this.tapSize * 0.5, modeDrumShadow(this.bgMode));
 				/*var s = this.addSpot('up' + i, x + this.tapSize * 0.0, y + this.tapSize * (i + 0.2 + sk), this.tapSize * 5, this.tapSize * 1, function () {
 				riffshareflat.userActionUpTrack(this.order);
 				});
 				s.order = i;*/
 				//if (this.trackInfo[i].sound.zones[0].buffer) {
-				this.tileText(g, x + this.tapSize * 1, y + this.tapSize * (i + 0.75 + sk), this.tapSize * 0.75, me.findTrackTitle(me.findTrackNum(i)), track.color);
+				this.tileText(g, x + this.tapSize * 0.5, y + this.tapSize * (i + 0.75 + sk), this.tapSize * 0.75, me.findTrackTitle(me.findTrackNum(i)), track.color);
 				//}
 				for (var v = 0; v < 11; v++) {
 					var s = this.addSpot('volton' + i + 'x' + v, x + this.tapSize * (6 + v), y + this.tapSize * (i + sk), this.tapSize, this.tapSize, function () {
@@ -2827,9 +2868,12 @@ RiffShareFlat.prototype.childExists = function (id, layer) {
 };
 RiffShareFlat.prototype.collision = function (x1, y1, w1, h1, x2, y2, w2, h2) {
 	if (x1 + w1 < x2 //
-		|| x1 > x2 + w2 //
-		|| y1 + h1 < y2 //
-		|| y1 > y2 + h2 //
+		||
+		x1 > x2 + w2 //
+		||
+		y1 + h1 < y2 //
+		||
+		y1 > y2 + h2 //
 	) {
 		return false;
 	} else {
@@ -3752,6 +3796,7 @@ RiffShareFlat.prototype.midiNoteOff = function (pitch) {
 		this.midiKeys[pitch].cancel();
 	}
 };
+
 function loadFromString(riff) {
 	addStateToHistory();
 	saveObject2localStorage('storeDrums', []);
@@ -3759,9 +3804,11 @@ function loadFromString(riff) {
 	decodeState(riff);
 	//window.location = "https://vk.com/app7562667_95994542/";
 
-	document.getElementById('openmsg').innerHTML = 'Открыть мелодию в музыкальном редакторе';
-	window.scrollTo(0, 0);
+	//document.getElementById('openmsg').innerHTML = 'Открыть мелодию в музыкальном редакторе';
+	//window.scrollTo(0, 0);
+	switchEdit();
 }
+
 function loadFromURL() {
 	//var riff = getUrlVars()['riff'];
 	var riff = window.location.hash.substr(1);
@@ -3770,8 +3817,10 @@ function loadFromURL() {
 	if (riff) {
 		if (riff.length > 22) {
 			loadFromString(riff);
+			return true;
 		}
 	}
+	return false;
 }
 //https://surikov.github.io/RiffShareAndroid/app/src/main/assets/load.html?riff=78-00000055-50806070-0d0c0b10080b0d0e070c-000301fe030e048305ff060107564010411142114311441145114611471180fe81ff82fe83ff84fe85ff86fe87ffc00fc7ee-006021d40007020540046022040047020540076021d40077020340096021d400970203400a60222400a70200400c6021d400c70200400e6021b400e7020340106021d40107020540146022440147020540176021d40196021d401970200401a60225401a70200401c60224401c70203401e60220401e7020540206021d40207020140226022440246022940247020140266021d40276021b40277020340296021b402970203402a60218402a70200402c6021f402c70203402e60b1d402e70205403070205403970203403a70200403c7020a403e7020840
 //https://vk.com/app7562667_95994542#78-00000055-50806070-0d0c0b10080b0d0e070c-000301fe030e048305ff060107564010411142114311441145114611471180fe81ff82fe83ff84fe85ff86fe87ffc00fc7ee-006021d40007020540046022040047020540076021d40077020340096021d400970203400a60222400a70200400c6021d400c70200400e6021b400e7020340106021d40107020540146022440147020540176021d40196021d401970200401a60225401a70200401c60224401c70203401e60220401e7020540206021d40207020140226022440246022940247020140266021d40276021b40277020340296021b402970203402a60218402a70200402c6021f402c70203402e60b1d402e70205403070205403970203403a70200403c7020a403e7020840		
@@ -3781,6 +3830,7 @@ function promptFile() {
 	//console.log('promptFile');
 	document.getElementById("filesOpen").click();
 }
+
 function adjustPitch(pitch) {
 	var p = 1 * pitch - 12 * 3;
 	if (p < 0) {
@@ -3795,6 +3845,7 @@ function adjustPitch(pitch) {
 	}
 	return p;
 }
+
 function noDrum(drums, d, b) {
 	for (var i = 0; i < drums.length; i++) {
 		if (drums[i].drum == d && drums[i].beat == b) {
@@ -3803,19 +3854,21 @@ function noDrum(drums, d, b) {
 	}
 	return true;
 }
+
 function noTone(tones, t, b, p) {
 	//console.log(tones);
-	for (var i = 0; i < tones.length; i++) {//console.log(tones,t,b,p);
+	for (var i = 0; i < tones.length; i++) { //console.log(tones,t,b,p);
 		if (tones[i].track == t && tones[i].beat == b && tones[i].pitch == p) {
 			return false;
 		}
 	}
 	return true;
 }
+
 function openSong(evt) {
 	console.log("openSong v2", evt);
 	//console.log(encodeState());
-	var skp = 0;//1 * document.getElementById("skip16").value;
+	var skp = 0; //1 * document.getElementById("skip16").value;
 
 	var fileList = evt.target.files;
 	if (fileList.length > 0) {
@@ -3836,7 +3889,7 @@ function openSong(evt) {
 				//console.log(midiFile.header.getTicksPerFrame());
 				//console.log(midiFile.header.setSMTPEDivision());
 				//console.log(midiFile.header.getTicksPerBeat(),':',midiFile.header.getTimeDivision());
-				var ticksPerBeat = 480;//midiFile.header.getTicksPerBeat();
+				var ticksPerBeat = 480; //midiFile.header.getTicksPerBeat();
 				//console.log('ticksPerBeat', ticksPerBeat);
 				if (midiFile.header.getTimeDivision() === MIDIFile.Header.TICKS_PER_BEAT) {
 					ticksPerBeat = midiFile.header.getTicksPerBeat();
@@ -3853,7 +3906,7 @@ function openSong(evt) {
 				saveObject2localStorage('storeDrums', []);
 				saveObject2localStorage('storeTracks', []);
 
-				var storeTracks = [];//sureArray(readObjectFromlocalStorage('storeTracks'), []);
+				var storeTracks = []; //sureArray(readObjectFromlocalStorage('storeTracks'), []);
 				for (var t = 0; t < song.tracks.length; t++) {
 					var track = song.tracks[t];
 					var ins = 4;
@@ -3896,33 +3949,51 @@ function openSong(evt) {
 				}
 				saveObject2localStorage('storeTracks', storeTracks);
 				//console.log('storeTracks', storeTracks)
-				var storeDrums = [];//sureArray(readObjectFromlocalStorage('storeDrums'), []);
+				var storeDrums = []; //sureArray(readObjectFromlocalStorage('storeDrums'), []);
 				for (var t = 0; t < song.beats.length; t++) {
 					var track = song.beats[t];
 					var ins = 6;
-					if (track.n >= 35 && track.n <= 36) { ins = 0; }
-					if (track.n == 41 || track.n == 43) { ins = 1; }
-					if (track.n == 38 || track.n == 40) { ins = 2; }
-					if (track.n == 45 || track.n == 47 || track.n == 48 || track.n == 50) { ins = 3; }
-					if (track.n == 42 || track.n == 44) { ins = 4; }
-					if (track.n == 46) { ins = 5; }
-					if (track.n == 49) { ins = 7; }
+					if (track.n >= 35 && track.n <= 36) {
+						ins = 0;
+					}
+					if (track.n == 41 || track.n == 43) {
+						ins = 1;
+					}
+					if (track.n == 38 || track.n == 40) {
+						ins = 2;
+					}
+					if (track.n == 45 || track.n == 47 || track.n == 48 || track.n == 50) {
+						ins = 3;
+					}
+					if (track.n == 42 || track.n == 44) {
+						ins = 4;
+					}
+					if (track.n == 46) {
+						ins = 5;
+					}
+					if (track.n == 49) {
+						ins = 7;
+					}
 					for (var n = 0; n < track.notes.length; n++) {
 						var note = track.notes[n];
 						var beat = Math.round(4 * note.tick / ticksPerBeat);
 						if (beat >= skp && beat < skp + 256) {
 							if (noDrum(storeDrums, n, beat - skp)) {
-								storeDrums.push({ drum: ins, beat: beat - skp });
+								storeDrums.push({
+									drum: ins,
+									beat: beat - skp
+								});
 							}
 						}
 					}
 				}
 				saveObject2localStorage('storeDrums', storeDrums);
 				//console.log('storeDrums', storeDrums)
-				disableSaveState = true;
+				//disableSaveState = true;
 				//window.location='index.html';
 				//window.location = "https://vk.com/app7562667_95994542/";
-				window.scrollTo(0, 0);
+				//window.scrollTo(0, 0);
+				switchEdit();
 				/*
 				var midiParser = new MidiParser(arrayBuffer);
 				midiParser.parse();
@@ -3981,5 +4052,3 @@ function openSong(evt) {
 		fileReader.readAsArrayBuffer(file);
 	}
 }
-
-
