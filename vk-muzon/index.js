@@ -2043,9 +2043,9 @@ RiffShareFlat.prototype.addSmallTiles = function (left, top, width, height) {
 			//window.open(url, '_self')
 			console.log(url, url);
 			//bridge.send("VKWebAppShowWallPostBox", { "message": "Hello!" });
-			vkBridge.send('VKWebAppShowWallPostBox', {
-					"message": "Открыть в VKMuzOn " + url
-				}).then(data => {
+			//vkBridge.send('VKWebAppShowWallPostBox', {"message": "Открыть в VKMuzOn " + url})
+			vkBridge.send('VKWebAppShare', {"link": url})
+				.then(data => {
 					console.log('vkBridge data', data);
 				})
 				.catch(error => {
