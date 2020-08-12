@@ -1220,10 +1220,6 @@ RiffShareFlat.prototype.loadStorageState = function () {
 	this.resetAllLayersNow();
 };
 RiffShareFlat.prototype.saveState = function () {
-	/*if (disableSaveState) {
-		console.log('no saveState');
-		return;
-	}*/
 	if (this.player) {
 		console.log('saveState');
 	}else{
@@ -1232,6 +1228,12 @@ RiffShareFlat.prototype.saveState = function () {
 	}
 	
 	this.stopPlay();
+	this.saveNotesPosition();
+};
+RiffShareFlat.prototype.saveNotesPosition = function () {
+	
+	console.log('saveNotesPosition');
+	
 	var fullState = {};
 	var flatstate = {
 		tx: this.translateX,
