@@ -149,7 +149,7 @@
 		<p>после этого прослушайте полученную мелодию.</p>
 		<p>Внимание! Из файлов читаются первые 16 тактов и все инструменты пподгоняются под имеющиеся. Громкость эквалайзер не
 			учитываются.</p>
-		<p><i>VKMuzOn v1.35</i></p>
+		<p><i>VKMuzOn v1.36</i></p>
 	</div>
 	<div id='editDiv'>
 
@@ -189,7 +189,8 @@
 
 		startApp();
 		new RiffShareFlat();
-
+		
+		
 
 		//console.log('window.riffshareflat',window.riffshareflat);
 		//console.log('riffshareflat',riffshareflat);
@@ -198,7 +199,8 @@
 			document.getElementById('helpDiv').style.display = "none";
 			document.getElementById('editDiv').style.display = "inline";
 			//riffshareflat.saveState();
-			riffshareflat.init();
+			
+			riffshareflat.resetSize();
 		}
 
 		function switchHelp() {
@@ -206,6 +208,8 @@
 			document.getElementById('editDiv').style.display = "none";
 			riffshareflat.saveState();
 		}
+
+		riffshareflat.init();
 		switchHelp();
 
 		document.getElementById('filesOpen').addEventListener('change', openSong, false);

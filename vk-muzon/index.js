@@ -593,6 +593,12 @@ function startListenMIDI() {
 
 function RiffShareFlat() {
 	window.riffshareflat = this;
+	window.addEventListener("resize", riffshareflat.resetSize.bind(riffshareflat));
+
+	window.addEventListener("pagehide", riffshareflat.saveState.bind(riffshareflat));
+	window.addEventListener("blur", riffshareflat.saveState.bind(riffshareflat));
+	window.addEventListener("unload", riffshareflat.saveState.bind(riffshareflat));
+	
 	return this;
 }
 RiffShareFlat.prototype.init = function () {
@@ -991,6 +997,7 @@ RiffShareFlat.prototype.init = function () {
 
 	];*/
 	this.setupInput();
+	/*
 	window.onresize = function () {
 		riffshareflat.resetSize();
 	};
@@ -1023,7 +1030,7 @@ RiffShareFlat.prototype.init = function () {
 		};
 	}catch(ex){
 
-	}
+	}*/
 	this.storeDrums = [];
 	this.storeTracks = [];
 	//this.storeDrums = sureArray(readObjectFromlocalStorage('storeDrums'), []);
@@ -3057,6 +3064,9 @@ RiffShareFlat.prototype.closeMenuDrum = function () {
 	document.getElementById('menuDiv2').style.width = '0cm';
 };*/
 RiffShareFlat.prototype.resetSize = function () {
+	
+	//console.log('resetSize',this,this.contentSVG);
+	
 	this.innerWidth = (this.marginLeft + this.marginRight + 16 * 16) * this.tapSize;
 	this.innerHeight = (this.marginTop + this.marginBottom + 8 + 5 * 12) * this.tapSize;
 	this.contentSVG.style.width = this.contentDiv.clientWidth + 'px';
