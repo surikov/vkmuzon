@@ -257,12 +257,12 @@ function decodeState(encoded) {
 		saveText2localStorage('tempo', '' + tempo);
 		for (var i = 0; i < 8; i++) {
 			var n = 10 * parseInt(strings[1].substring(i, i + 1), 16);
-			//console.log('track'+i,n);
+			console.log('track'+i,n);
 			saveText2localStorage('track' + i, '' + n);
 		}
 		for (var i = 0; i < 8; i++) {
 			var n = 10 * parseInt(strings[2].substring(i, i + 1), 16);
-			//console.log('drum'+i,n);
+			console.log('drum'+i,n);
 			saveText2localStorage('drum' + i, '' + n);
 		}
 		//console.log(strings[3]);
@@ -1157,7 +1157,10 @@ RiffShareFlat.prototype.loadStorageState = function () {
 	this.drumVolumes = [];
 	for (var i = 0; i < 8; i++) {
 		this.drumVolumes.push(sureNumeric(readObjectFromlocalStorage('drum' + i), 0, 70, 100));
-		this.drumInfo[i].replacement = sureNumeric(readObjectFromlocalStorage('reDrum' + i), 0, 0, 1000);
+		this.trackInfo[7 - i].volume= sureNumeric(readObjectFromlocalStorage('track'+i), 0, 70, 100);
+		//this.trackInfo[7 - i].volume = sureNumeric(readObjectFromlocalStorage('reTrack' + i), 0, 0, 2000);
+		//saveText2localStorage('track' + i, '' + this.trackInfo[7 - i].volume);
+		/*this.drumInfo[i].replacement = sureNumeric(readObjectFromlocalStorage('reDrum' + i), 0, 0, 1000);
 		if (this.drumInfo[i].replacement) {
 			var info = this.player.loader.drumInfo(this.drumInfo[i].replacement - 1);
 			this.player.loader.startLoad(this.audioContext, info.url, info.variable);
@@ -1168,7 +1171,8 @@ RiffShareFlat.prototype.loadStorageState = function () {
 			var info = this.player.loader.instrumentInfo(this.trackInfo[7 - i].replacement - 1);
 			this.player.loader.startLoad(this.audioContext, info.url, info.variable);
 			this.trackInfo[7 - i].info = info;
-		}
+		}*/
+		//console.log(this.trackInfo);
 	}
 	//console.log(this.trackInfo, this.drumInfo);
 	this.equalizer = [];
@@ -3835,6 +3839,7 @@ function loadFromString(riff) {
 	//window.scrollTo(0, 0);
 	riffshareflat.loadState();
 	switchEdit();
+	console.log(this);
 }
 
 function loadFromURL() {
