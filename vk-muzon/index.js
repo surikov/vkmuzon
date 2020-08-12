@@ -2041,7 +2041,7 @@ RiffShareFlat.prototype.addSmallTiles = function (left, top, width, height) {
 			//var url = "https://zvoog.app/x/share.php?top=" + top + "&mode=" + me.bgMode + "&riff=" + encoded;
 			var url = "https://vk.com/app7562667_95994542/#" + encoded;
 			//window.open(url, '_self')
-			console.log(url, url);
+			console.log('share', url);
 			//bridge.send("VKWebAppShowWallPostBox", { "message": "Hello!" });
 			//vkBridge.send('VKWebAppShowWallPostBox', {"message": "Открыть в VKMuzOn " + url})
 			vkBridge.send('VKWebAppShare', {"link": url})
