@@ -1012,6 +1012,18 @@ RiffShareFlat.prototype.init = function () {
 	window.onblur = function () {
 		riffshareflat.saveState();
 	};
+	try{
+		var target = window;
+		while (target != target.parent) {
+			target = target.parent;
+			console.log(target);
+		}
+		target.onblur = function () {
+			riffshareflat.saveState();
+		};
+	}catch(ex){
+
+	}
 	this.storeDrums = [];
 	this.storeTracks = [];
 	//this.storeDrums = sureArray(readObjectFromlocalStorage('storeDrums'), []);
