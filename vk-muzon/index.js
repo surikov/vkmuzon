@@ -1253,7 +1253,7 @@ RiffShareFlat.prototype.saveState = function () {
 	saveString2IndexedDB('fullState', JSON.stringify(fullState), function () {
 		//console.log('done saveString2IndexedDB');
 	});
-	window.onunload = null;
+	//window.onunload = null;
 };
 RiffShareFlat.prototype.copyDrums = function () {
 	var drums = [];
@@ -2047,9 +2047,11 @@ RiffShareFlat.prototype.addSmallTiles = function (left, top, width, height) {
 			vkBridge.send('VKWebAppShare', {"link": url})
 				.then(data => {
 					console.log('vkBridge data', data);
+					riffshareflat.init();
 				})
 				.catch(error => {
 					console.log('vkBridge error', error);
+					riffshareflat.init();
 				});
 		});
 		/*
