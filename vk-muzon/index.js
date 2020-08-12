@@ -1231,7 +1231,7 @@ RiffShareFlat.prototype.saveState = function () {
 	this.saveNotesPosition();
 };
 RiffShareFlat.prototype.saveNotesPosition = function () {
-	
+
 	console.log('saveNotesPosition');
 	
 	var fullState = {};
@@ -3824,6 +3824,7 @@ RiffShareFlat.prototype.midiNoteOff = function (pitch) {
 };
 
 function loadFromString(riff) {
+	console.log('riff', riff);
 	addStateToHistory();
 	saveObject2localStorage('storeDrums', []);
 	saveObject2localStorage('storeTracks', []);
@@ -3832,6 +3833,7 @@ function loadFromString(riff) {
 
 	//document.getElementById('openmsg').innerHTML = 'Открыть мелодию в музыкальном редакторе';
 	//window.scrollTo(0, 0);
+	riffshareflat.loadState();
 	switchEdit();
 }
 
@@ -3839,9 +3841,9 @@ function loadFromURL() {
 	//var riff = getUrlVars()['riff'];
 	var riff = window.location.hash.substr(1);
 	//console.log('location.href', location.href);
-	//console.log('riff', riff);
+	
 	if (riff) {
-		if (riff.length > 22) {
+		if (riff.length > 55) {
 			loadFromString(riff);
 			return true;
 		}
