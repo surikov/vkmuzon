@@ -46,7 +46,15 @@ function startApp() {
 
 }
 function vkPromptShareURL(url) {
-
+	vkBridge.send('VKWebAppShare', { "link": url })
+		.then(data => {
+			console.log('vkBridge data', data);
+			riffshareflat.init();
+		})
+		.catch(error => {
+			console.log('vkBridge error', error);
+			riffshareflat.init();
+		});
 }
 function vkDoShareURL(url) {
 	vkBridge.send("VKWebAppCallAPIMethod"
@@ -63,10 +71,11 @@ function vkDoShareURL(url) {
 		})
 		.then(data => {
 			console.log('testURL data', data, data.response.short_url);
-			//testURL();
+			vkPromptShareURL(data.response.short_url);
 		})
 		.catch(error => {
 			console.log('testURL error', error, url);
+			vkPromptShareURL(url);
 		});
 }
 function testURL() {
