@@ -3852,6 +3852,7 @@ function loadFromString(riff) {
 	riffshareflat.loadState();
 	switchEdit();
 	console.log(this);
+	return false;
 }
 
 function loadFromURL() {
