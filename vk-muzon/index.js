@@ -9,23 +9,23 @@ function startApp() {
 
 	};*/
 	vkBridge.send('VKWebAppInit').then(data => {
-			console.log('vkBridge data', data);
-		})
+		console.log('vkBridge data', data);
+	})
 		.catch(error => {
 			console.log('vkBridge error', error);
 		});
-		bridge.subscribe(e => {
-			console.log('bridge', e);
-			if (e.detail.type === 'VKWebAppViewHide') {
-			  console.log('VKWebAppViewHide',e);
-			  try{
+	vkBridge.subscribe(e => {
+		console.log('bridge', e);
+		if (e.detail.type === 'VKWebAppViewHide') {
+			console.log('VKWebAppViewHide', e);
+			try {
 				riffshareflat.stopPlay();
-			  }catch(xx){
-				  console.log('ops',xx);
-			  }
+			} catch (xx) {
+				console.log('ops', xx);
 			}
-		  });
-		
+		}
+	});
+
 }
 
 function readStringFromWebDB(name, ondone) {
@@ -269,12 +269,12 @@ function decodeState(encoded) {
 		saveText2localStorage('tempo', '' + tempo);
 		for (var i = 0; i < 8; i++) {
 			var n = 10 * parseInt(strings[1].substring(i, i + 1), 16);
-			console.log('track'+i,n);
+			console.log('track' + i, n);
 			saveText2localStorage('track' + i, '' + n);
 		}
 		for (var i = 0; i < 8; i++) {
 			var n = 10 * parseInt(strings[2].substring(i, i + 1), 16);
-			console.log('drum'+i,n);
+			console.log('drum' + i, n);
 			saveText2localStorage('drum' + i, '' + n);
 		}
 		//console.log(strings[3]);
@@ -610,7 +610,7 @@ function RiffShareFlat() {
 	window.addEventListener("pagehide", riffshareflat.saveState.bind(riffshareflat));
 	window.addEventListener("blur", riffshareflat.saveState.bind(riffshareflat));
 	window.addEventListener("unload", riffshareflat.saveState.bind(riffshareflat));
-	
+
 	return this;
 }
 RiffShareFlat.prototype.init = function () {
@@ -755,111 +755,111 @@ RiffShareFlat.prototype.init = function () {
 		length: 2
 	}];
 	this.trackInfo = [{
-			color: 'rgb(255,127,77)',
-			shadow: 'rgba(255,127,77,0.4)',
-			//color: 'rgba(255,204,187,1)',
-			//shadow: 'rgba(255,204,187,0.4)',
-			title: 'Синтезатор',
-			order: 2,
-			sound: _tone_0390_GeneralUserGS_sf2_file,
-			volume: sureNumeric(readObjectFromlocalStorage('track7'), 0, 70, 100),
-			nn: 7,
-			octave: 3,
-			inChordDelay: 0.01,
-			volumeRatio: 0.5
-		}, {
-			color: 'rgb(178,178,0)',
-			shadow: 'rgba(178,178,0,0.4)',
-			//color: 'rgba(204,153,0,1)',
-			//shadow: 'rgba(204,153,0,0.4)',
-			title: 'Струнные',
-			order: 1,
-			sound: _tone_0490_Chaos_sf2_file,
-			volume: sureNumeric(readObjectFromlocalStorage('track6'), 0, 70, 100),
-			nn: 6,
-			octave: 3,
-			inChordDelay: 0,
-			volumeRatio: 0.3
-		}, {
-			color: 'rgb(140,0,64)',
-			shadow: 'rgba(140,0,64,0.4)',
-			//color: 'rgba(204,0,204,1)',
-			//shadow: 'rgba(204,0,204,0.4)',
-			title: 'Бас-гитара',
-			order: 5,
-			sound: _tone_0340_Aspirin_sf2_file,
-			volume: sureNumeric(readObjectFromlocalStorage('track5'), 0, 70, 100),
-			nn: 5,
-			octave: 2,
-			inChordDelay: 0.01,
-			volumeRatio: 0.75
-		}, {
-			color: 'rgb(0,127,255)',
-			shadow: 'rgba(0,127,255,0.4)',
-			//color: 'rgba(00,153,255,1)',
-			//shadow: 'rgba(00,153,255,0.4)',
-			title: 'Пианино',
-			order: 3,
-			sound: _tone_0001_FluidR3_GM_sf2_file,
-			volume: sureNumeric(readObjectFromlocalStorage('track4'), 0, 70, 100),
-			nn: 4,
-			octave: 3,
-			inChordDelay: 0,
-			volumeRatio: 0.5
-		}, {
-			color: 'rgb(140,35,0)',
-			shadow: 'rgba(140,35,0,0.4)',
-			//color: 'rgba(153,51,0,1)',
-			//shadow: 'rgba(153,51,0,0.4)',
-			title: 'Мьют-дисторшн',
-			order: 4,
-			sound: _tone_0280_LesPaul_sf2_file,
-			volume: sureNumeric(readObjectFromlocalStorage('track3'), 0, 70, 100),
-			nn: 3,
-			octave: 3,
-			inChordDelay: 0,
-			volumeRatio: 1.0
-		}, {
-			color: 'rgb(35,51,255)',
-			shadow: 'rgba(35,51,255,0.4)',
-			//color: 'rgba(51,51,255,1)',
-			//shadow: 'rgba(51,51,255,0.4)',
-			title: 'Синт. орган',
-			order: 0,
-			inChordDelay: 0,
-			sound: _tone_0170_SBLive_sf2,
-			//sound: _tone_0170_JCLive_sf2_file,
-			volume: sureNumeric(readObjectFromlocalStorage('track2'), 0, 70, 100),
-			nn: 2,
-			octave: 4,
-			volumeRatio: 0.7
-		}, {
-			color: 'rgb(45,178,0)',
-			shadow: 'rgba(45,178,0,0.4)',
-			//color: 'rgba(0,153,0,1)',
-			//shadow: 'rgba(0,153,0,0.4)',
-			title: 'Аккуст. гитара',
-			order: 6,
-			sound: _tone_0250_Chaos_sf2_file,
-			volume: sureNumeric(readObjectFromlocalStorage('track1'), 0, 70, 100),
-			nn: 1,
-			octave: 3,
-			inChordDelay: 0.01,
-			volumeRatio: 0.5
-		}, {
-			color: 'rgb(255,0,0)',
-			shadow: 'rgba(255,0,0,0.4)',
-			//color: 'rgba(255,0,0,1)',
-			//shadow: 'rgba(255,0,0,0.4)',
-			title: 'Гитара-дисторшн',
-			order: 7,
-			sound: _tone_0300_LesPaul_sf2_file,
-			volume: sureNumeric(readObjectFromlocalStorage('track0'), 0, 70, 100),
-			nn: 0,
-			octave: 3,
-			inChordDelay: 0.01,
-			volumeRatio: 0.7
-		}
+		color: 'rgb(255,127,77)',
+		shadow: 'rgba(255,127,77,0.4)',
+		//color: 'rgba(255,204,187,1)',
+		//shadow: 'rgba(255,204,187,0.4)',
+		title: 'Синтезатор',
+		order: 2,
+		sound: _tone_0390_GeneralUserGS_sf2_file,
+		volume: sureNumeric(readObjectFromlocalStorage('track7'), 0, 70, 100),
+		nn: 7,
+		octave: 3,
+		inChordDelay: 0.01,
+		volumeRatio: 0.5
+	}, {
+		color: 'rgb(178,178,0)',
+		shadow: 'rgba(178,178,0,0.4)',
+		//color: 'rgba(204,153,0,1)',
+		//shadow: 'rgba(204,153,0,0.4)',
+		title: 'Струнные',
+		order: 1,
+		sound: _tone_0490_Chaos_sf2_file,
+		volume: sureNumeric(readObjectFromlocalStorage('track6'), 0, 70, 100),
+		nn: 6,
+		octave: 3,
+		inChordDelay: 0,
+		volumeRatio: 0.3
+	}, {
+		color: 'rgb(140,0,64)',
+		shadow: 'rgba(140,0,64,0.4)',
+		//color: 'rgba(204,0,204,1)',
+		//shadow: 'rgba(204,0,204,0.4)',
+		title: 'Бас-гитара',
+		order: 5,
+		sound: _tone_0340_Aspirin_sf2_file,
+		volume: sureNumeric(readObjectFromlocalStorage('track5'), 0, 70, 100),
+		nn: 5,
+		octave: 2,
+		inChordDelay: 0.01,
+		volumeRatio: 0.75
+	}, {
+		color: 'rgb(0,127,255)',
+		shadow: 'rgba(0,127,255,0.4)',
+		//color: 'rgba(00,153,255,1)',
+		//shadow: 'rgba(00,153,255,0.4)',
+		title: 'Пианино',
+		order: 3,
+		sound: _tone_0001_FluidR3_GM_sf2_file,
+		volume: sureNumeric(readObjectFromlocalStorage('track4'), 0, 70, 100),
+		nn: 4,
+		octave: 3,
+		inChordDelay: 0,
+		volumeRatio: 0.5
+	}, {
+		color: 'rgb(140,35,0)',
+		shadow: 'rgba(140,35,0,0.4)',
+		//color: 'rgba(153,51,0,1)',
+		//shadow: 'rgba(153,51,0,0.4)',
+		title: 'Мьют-дисторшн',
+		order: 4,
+		sound: _tone_0280_LesPaul_sf2_file,
+		volume: sureNumeric(readObjectFromlocalStorage('track3'), 0, 70, 100),
+		nn: 3,
+		octave: 3,
+		inChordDelay: 0,
+		volumeRatio: 1.0
+	}, {
+		color: 'rgb(35,51,255)',
+		shadow: 'rgba(35,51,255,0.4)',
+		//color: 'rgba(51,51,255,1)',
+		//shadow: 'rgba(51,51,255,0.4)',
+		title: 'Синт. орган',
+		order: 0,
+		inChordDelay: 0,
+		sound: _tone_0170_SBLive_sf2,
+		//sound: _tone_0170_JCLive_sf2_file,
+		volume: sureNumeric(readObjectFromlocalStorage('track2'), 0, 70, 100),
+		nn: 2,
+		octave: 4,
+		volumeRatio: 0.7
+	}, {
+		color: 'rgb(45,178,0)',
+		shadow: 'rgba(45,178,0,0.4)',
+		//color: 'rgba(0,153,0,1)',
+		//shadow: 'rgba(0,153,0,0.4)',
+		title: 'Аккуст. гитара',
+		order: 6,
+		sound: _tone_0250_Chaos_sf2_file,
+		volume: sureNumeric(readObjectFromlocalStorage('track1'), 0, 70, 100),
+		nn: 1,
+		octave: 3,
+		inChordDelay: 0.01,
+		volumeRatio: 0.5
+	}, {
+		color: 'rgb(255,0,0)',
+		shadow: 'rgba(255,0,0,0.4)',
+		//color: 'rgba(255,0,0,1)',
+		//shadow: 'rgba(255,0,0,0.4)',
+		title: 'Гитара-дисторшн',
+		order: 7,
+		sound: _tone_0300_LesPaul_sf2_file,
+		volume: sureNumeric(readObjectFromlocalStorage('track0'), 0, 70, 100),
+		nn: 0,
+		octave: 3,
+		inChordDelay: 0.01,
+		volumeRatio: 0.7
+	}
 
 	];
 
@@ -1073,7 +1073,7 @@ RiffShareFlat.prototype.init = function () {
 			.test(usrAgnt) //
 			||
 			/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i //
-			.test(usrAgnt.substr(0, 4))) {
+				.test(usrAgnt.substr(0, 4))) {
 			this.echoOn = false;
 			document.title = 'Mobile VKMuzOn';
 		} else {
@@ -1169,7 +1169,7 @@ RiffShareFlat.prototype.loadStorageState = function () {
 	this.drumVolumes = [];
 	for (var i = 0; i < 8; i++) {
 		this.drumVolumes.push(sureNumeric(readObjectFromlocalStorage('drum' + i), 0, 70, 100));
-		this.trackInfo[7 - i].volume= sureNumeric(readObjectFromlocalStorage('track'+i), 0, 70, 100);
+		this.trackInfo[7 - i].volume = sureNumeric(readObjectFromlocalStorage('track' + i), 0, 70, 100);
 		//this.trackInfo[7 - i].volume = sureNumeric(readObjectFromlocalStorage('reTrack' + i), 0, 0, 2000);
 		//saveText2localStorage('track' + i, '' + this.trackInfo[7 - i].volume);
 		/*this.drumInfo[i].replacement = sureNumeric(readObjectFromlocalStorage('reDrum' + i), 0, 0, 1000);
@@ -1238,18 +1238,18 @@ RiffShareFlat.prototype.loadStorageState = function () {
 RiffShareFlat.prototype.saveState = function () {
 	if (this.player) {
 		console.log('saveState');
-	}else{
+	} else {
 		console.log('skip saveState');
 		return;
 	}
-	
+
 	this.stopPlay();
 	this.saveNotesPosition();
 };
 RiffShareFlat.prototype.saveNotesPosition = function () {
 
 	console.log('saveNotesPosition');
-	
+
 	var fullState = {};
 	var flatstate = {
 		tx: this.translateX,
@@ -1894,7 +1894,7 @@ RiffShareFlat.prototype.moveBeatCounter = function () {
 
 RiffShareFlat.prototype.stopPlay = function () {
 	this.onAir = false;
-	
+
 	if (this.player) {
 		clearTimeout(this.tickID);
 		this.player.cancelQueue(this.audioContext);
@@ -2081,7 +2081,7 @@ RiffShareFlat.prototype.addSmallTiles = function (left, top, width, height) {
 			console.log('share', url);
 			//bridge.send("VKWebAppShowWallPostBox", { "message": "Hello!" });
 			//vkBridge.send('VKWebAppShowWallPostBox', {"message": "Открыть в VKMuzOn " + url})
-			vkBridge.send('VKWebAppShare', {"link": url})
+			vkBridge.send('VKWebAppShare', { "link": url })
 				.then(data => {
 					console.log('vkBridge data', data);
 					riffshareflat.init();
@@ -3082,9 +3082,9 @@ RiffShareFlat.prototype.closeMenuDrum = function () {
 	document.getElementById('menuDiv2').style.width = '0cm';
 };*/
 RiffShareFlat.prototype.resetSize = function () {
-	
+
 	//console.log('resetSize',this,this.contentSVG);
-	
+
 	this.innerWidth = (this.marginLeft + this.marginRight + 16 * 16) * this.tapSize;
 	this.innerHeight = (this.marginTop + this.marginBottom + 8 + 5 * 12) * this.tapSize;
 	this.contentSVG.style.width = this.contentDiv.clientWidth + 'px';
@@ -3858,7 +3858,7 @@ function loadFromURL() {
 	//var riff = getUrlVars()['riff'];
 	var riff = window.location.hash.substr(1);
 	//console.log('location.href', location.href);
-	
+
 	if (riff) {
 		if (riff.length > 55) {
 			loadFromString(riff);
