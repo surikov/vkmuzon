@@ -1,3 +1,4 @@
+var vk_access_token='';
 //disableSaveState = false;
 function startApp() {
 	console.log('startApp');
@@ -13,7 +14,8 @@ function startApp() {
 		.then(data => {
 			console.log('vkBridge data', data);
 			console.log('vkBridge', vkBridge);
-			testURL();
+			//testURL();
+			vkBridge.send("VKWebAppGetAuthToken", { "app_id": 7562667, "scope": "" });
 		})
 		.catch(error => {
 			console.log('vkBridge error', error);
@@ -28,12 +30,16 @@ function startApp() {
 				console.log('ops', xx);
 			}
 		}
+		if (e.detail.type === 'VKWebAppAccessTokenReceived') {
+			vk_access_token=e.detail.access_token;
+			testURL();
+		}
 	});
 
 }
 function testURL() {
 	console.log('testURL');
-	/*vkBridge.send("VKWebAppCallAPIMethod"
+	vkBridge.send("VKWebAppCallAPIMethod"
 		, {
 			"method": "util.getShortLink"
 			, "request_id": "32test"
@@ -50,8 +56,8 @@ function testURL() {
 		})
 		.catch(error => {
 			console.log('testURL error', error);
-		});*/
-	vkBridge.send("VKWebAppGetAuthToken", { "app_id": 7562667, "scope": "" });
+		});
+	//vkBridge.send("VKWebAppGetAuthToken", { "app_id": 7562667, "scope": "" });
 }
 function readStringFromWebDB(name, ondone) {
 	try {
