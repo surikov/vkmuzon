@@ -38,7 +38,7 @@ function startApp() {
 
 }
 function testURL() {
-	console.log('testURL');
+	console.log('testURL',vk_access_token);
 	vkBridge.send("VKWebAppCallAPIMethod"
 		, {
 			"method": "util.getShortLink"
@@ -46,7 +46,7 @@ function testURL() {
 			, "params": {
 				"user_ids": "1"
 				, "v":"5.122"
-				, "access_token": "your_token"
+				, "access_token": vk_access_token
 				, "url": "https://vk.com/dev/utils.getShortLink"
 				, "private": 0
 			}
