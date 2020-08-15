@@ -15,11 +15,11 @@ function startApp() {
 			console.log('vkBridge error', error);
 		});
 	vkBridge.subscribe(e => {
-		console.log('bridge', e);
+		console.log('bridge event', e);
 		if (e.detail.type === 'VKWebAppViewHide') {
 			console.log('VKWebAppViewHide', e);
 			try {
-				riffshareflat.stopPlay();
+				riffshareflat.saveState();
 			} catch (xx) {
 				console.log('ops', xx);
 			}
