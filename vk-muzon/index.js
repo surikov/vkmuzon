@@ -12,16 +12,8 @@ function startApp() {
 	console.log('vkBridge', vkBridge);
 	vkBridge.send('VKWebAppInit')
 		.then(data => {
-			//console.log('vkBridge data', data);
-			//console.log('vkBridge', vkBridge);
-			//testURL();
-			//console.log('location', location);
-			vkBridge.send("VKWebAppGetAuthToken", { "app_id": 7562667, "scope": "" });
-			//"https://surikov.github.io/vkmuzon/vk-muzon/?vk_access_token_settings=notify&vk_app_id=7562667&vk_are_notifications_enabled=0&vk_is_app_user=1&vk_is_favorite=1&vk_language=ru&vk_platform=desktop_web&vk_ref=other&vk_user_id=95994542&sign=2u84-OCSyKYWHi4itybCfQry0KuAMAaXhYHwjJjTZmI"
-			//var vars=getUrlVars();
-			//var curr_vk_user_id=1*vars['vk_user_id'];
-			//console.log(curr_vk_user_id,'/',vars);
-			//vkBridge.send("VKWebAppGetAuthToken", { "app_id": curr_vk_user_id, "scope": "" });
+			console.log('vkBridge data', data);
+			//vkBridge.send("VKWebAppGetAuthToken", { "app_id": 7562667, "scope": "" });
 		})
 		.catch(error => {
 			console.log('vkBridge error', error);
@@ -37,7 +29,7 @@ function startApp() {
 			}
 		}
 		if (e.detail.type === 'VKWebAppAccessTokenReceived') {
-			//console.log('token', e.detail.data);
+			console.log('token', e.detail.data);
 			vk_access_token = e.detail.data.access_token;
 			//setTimeout(testURL,2000);
 			//testURL();
