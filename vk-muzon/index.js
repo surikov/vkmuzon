@@ -27,9 +27,9 @@ function startApp() {
 			console.log('vkBridge error', error);
 		});
 	vkBridge.subscribe(e => {
-		console.log('bridge event', e);
+		//console.log('bridge event', e);
 		if (e.detail.type === 'VKWebAppViewHide') {
-			console.log('VKWebAppViewHide', e);
+			//console.log('VKWebAppViewHide', e);
 			try {
 				riffshareflat.saveState();
 			} catch (xx) {
@@ -37,7 +37,7 @@ function startApp() {
 			}
 		}
 		if (e.detail.type === 'VKWebAppAccessTokenReceived') {
-			console.log('token', e.detail.data);
+			//console.log('token', e.detail.data);
 			vk_access_token = e.detail.data.access_token;
 			//setTimeout(testURL,2000);
 			//testURL();
@@ -49,11 +49,13 @@ function vkPromptShareURL(url) {
 	vkBridge.send('VKWebAppShare', { "link": url })
 		.then(data => {
 			console.log('vkBridge data', data);
-			riffshareflat.init();
+			//riffshareflat.init();
+			riffshareflat.saveState();
 		})
 		.catch(error => {
 			console.log('vkBridge error', error);
-			riffshareflat.init();
+			//riffshareflat.init();
+			riffshareflat.saveState();
 		});
 }
 function vkDoShareURL(url) {
