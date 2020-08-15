@@ -15,6 +15,7 @@ function startApp() {
 			console.log('vkBridge error', error);
 		});
 		bridge.subscribe(e => {
+			console.log('bridge', e);
 			if (e.detail.type === 'VKWebAppViewHide') {
 			  console.log('VKWebAppViewHide',e);
 			  try{
