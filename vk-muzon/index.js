@@ -31,8 +31,9 @@ function startApp() {
 			}
 		}
 		if (e.detail.type === 'VKWebAppAccessTokenReceived') {
+			console.log('token',e.detail.data);
 			vk_access_token=e.detail.data.access_token;
-			testURL();
+			setTimeout(testURL,2000);
 		}
 	});
 
@@ -42,7 +43,7 @@ function testURL() {
 	vkBridge.send("VKWebAppCallAPIMethod"
 		, {
 			"method": "utils.getShortLink"
-			, "request_id": "32test"
+			, "request_id": "r"+Math.random()
 			, "params": {
 				"user_ids": "1"
 				, "v":"5.122"
