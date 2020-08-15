@@ -14,6 +14,17 @@ function startApp() {
 		.catch(error => {
 			console.log('vkBridge error', error);
 		});
+		bridge.subscribe(e => {
+			if (e.detail.type === 'VKWebAppViewHide') {
+			  console.log('VKWebAppViewHide',e);
+			  try{
+				riffshareflat.stopPlay();
+			  }catch(xx){
+				  console.log('ops',xx);
+			  }
+			}
+		  });
+		
 }
 
 function readStringFromWebDB(name, ondone) {
