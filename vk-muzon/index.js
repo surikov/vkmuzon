@@ -12,8 +12,8 @@ function startApp() {
 	console.log('vkBridge', vkBridge);
 	vkBridge.send('VKWebAppInit')
 		.then(data => {
-			console.log('vkBridge data', data);
-			console.log('vkBridge', vkBridge);
+			//console.log('vkBridge data', data);
+			//console.log('vkBridge', vkBridge);
 			//testURL();
 			//console.log('location', location);
 			vkBridge.send("VKWebAppGetAuthToken", { "app_id": 7562667, "scope": "" });
@@ -343,12 +343,12 @@ function decodeState(encoded) {
 		saveText2localStorage('tempo', '' + tempo);
 		for (var i = 0; i < 8; i++) {
 			var n = 10 * parseInt(strings[1].substring(i, i + 1), 16);
-			console.log('track' + i, n);
+			//console.log('track' + i, n);
 			saveText2localStorage('track' + i, '' + n);
 		}
 		for (var i = 0; i < 8; i++) {
 			var n = 10 * parseInt(strings[2].substring(i, i + 1), 16);
-			console.log('drum' + i, n);
+			//console.log('drum' + i, n);
 			saveText2localStorage('drum' + i, '' + n);
 		}
 		//console.log(strings[3]);
@@ -2165,7 +2165,7 @@ RiffShareFlat.prototype.addSmallTiles = function (left, top, width, height) {
 			//var url = "https://zvoog.app/x/share.php?top=" + top + "&mode=" + me.bgMode + "&riff=" + encoded;
 			var url = "https://vk.com/app7562667_95994542/#" + encoded;
 			//window.open(url, '_self')
-			//console.log('share', url);
+			console.log('share', url);
 			//bridge.send("VKWebAppShowWallPostBox", { "message": "Hello!" });
 			//vkBridge.send('VKWebAppShowWallPostBox', {"message": "Открыть в VKMuzOn " + url})
 			vkBridge.send('VKWebAppShare', { "link": url })
@@ -3931,7 +3931,7 @@ RiffShareFlat.prototype.midiNoteOff = function (pitch) {
 };
 
 function loadFromString(riff) {
-	console.log('riff', riff);
+	//console.log('riff', riff);
 	addStateToHistory();
 	saveObject2localStorage('storeDrums', []);
 	saveObject2localStorage('storeTracks', []);
