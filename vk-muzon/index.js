@@ -1,4 +1,4 @@
-var vk_access_token='';
+var vk_access_token = '';
 //disableSaveState = false;
 function startApp() {
 	console.log('startApp');
@@ -37,29 +37,53 @@ function startApp() {
 			}
 		}
 		if (e.detail.type === 'VKWebAppAccessTokenReceived') {
-			console.log('token',e.detail.data);
-			vk_access_token=e.detail.data.access_token;
+			console.log('token', e.detail.data);
+			vk_access_token = e.detail.data.access_token;
 			//setTimeout(testURL,2000);
-			testURL();
+			//testURL();
 		}
 	});
 
 }
-function testURL() {
-	console.log('testURL',vk_access_token);
+function vkPromptShareURL(url) {
+
+}
+function vkDoShareURL(url) {
 	vkBridge.send("VKWebAppCallAPIMethod"
 		, {
 			"method": "utils.getShortLink"
-			, "request_id": "r"+Math.random()
+			, "request_id": "r" + Math.random()
 			, "params": {
 				"user_ids": "1"
-				, "v":"5.122"
+				, "v": "5.122"
+				, "access_token": vk_access_token
+				, "url": url
+				, "private": 0
+			}
+		})
+		.then(data => {
+			console.log('testURL data', data, data.response.short_url);
+			//testURL();
+		})
+		.catch(error => {
+			console.log('testURL error', error, url);
+		});
+}
+function testURL() {
+	console.log('testURL', vk_access_token);
+	vkBridge.send("VKWebAppCallAPIMethod"
+		, {
+			"method": "utils.getShortLink"
+			, "request_id": "r" + Math.random()
+			, "params": {
+				"user_ids": "1"
+				, "v": "5.122"
 				, "access_token": vk_access_token
 				, "url": "https://vk.com/dev/utils.getShortLink"
 				, "private": 0
 			}
 		}).then(data => {
-			console.log('testURL data', data);
+			console.log('testURL data', data, data.response.short_url);
 			//testURL();
 		})
 		.catch(error => {
@@ -2117,10 +2141,10 @@ RiffShareFlat.prototype.addSmallTiles = function (left, top, width, height) {
 			//var url = "https://zvoog.app/x/share.php?top=" + top + "&mode=" + me.bgMode + "&riff=" + encoded;
 			var url = "https://vk.com/app7562667_95994542/#" + encoded;
 			//window.open(url, '_self')
-			console.log('share', url);
+			//console.log('share', url);
 			//bridge.send("VKWebAppShowWallPostBox", { "message": "Hello!" });
 			//vkBridge.send('VKWebAppShowWallPostBox', {"message": "Открыть в VKMuzOn " + url})
-			vkBridge.send('VKWebAppShare', { "link": url })
+			/*vkBridge.send('VKWebAppShare', { "link": url })
 				.then(data => {
 					console.log('vkBridge data', data);
 					riffshareflat.init();
@@ -2128,7 +2152,9 @@ RiffShareFlat.prototype.addSmallTiles = function (left, top, width, height) {
 				.catch(error => {
 					console.log('vkBridge error', error);
 					riffshareflat.init();
-				});
+				});*/
+
+			vkDoShareURL(url);
 		});
 		/*
 				this.tileCircle(g, 13 * this.tapSize, 17 * this.tapSize, 1 * this.tapSize, modeDrumShadow(this.bgMode));
