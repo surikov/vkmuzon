@@ -2163,7 +2163,9 @@ RiffShareFlat.prototype.addSmallTiles = function (left, top, width, height) {
 				}
 			}
 			//var url = "https://zvoog.app/x/share.php?top=" + top + "&mode=" + me.bgMode + "&riff=" + encoded;
-			var url = "https://vk.com/app7562667_95994542/#" + encoded;
+			//var url = "https://vk.com/app7562667_95994542/#" + encoded;
+			//var url = "https://vk.com/app7562667_-197910236/#" + encoded;
+			var url = "https://vk.com/app7562667/#" + encoded;
 			//window.open(url, '_self')
 			console.log('share', url);
 			//bridge.send("VKWebAppShowWallPostBox", { "message": "Hello!" });
