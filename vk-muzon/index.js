@@ -41,7 +41,7 @@ function testURL() {
 	console.log('testURL',vk_access_token);
 	vkBridge.send("VKWebAppCallAPIMethod"
 		, {
-			"method": "util.getShortLink"
+			"method": "utils.getShortLink"
 			, "request_id": "32test"
 			, "params": {
 				"user_ids": "1"
