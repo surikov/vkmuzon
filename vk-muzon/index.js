@@ -33,7 +33,24 @@ function startApp() {
 }
 function testURL() {
 	console.log('testURL');
-	vkBridge.getShortLink('https://vk.com/dev/utils.getShortLink',0)
+	bridge.send("VKWebAppCallAPIMethod"
+		, {
+			"method": "util.getShortLink"
+			, "request_id": "32test"
+			, "params": {
+				"user_ids": "1"
+				, "url": "google.ru"
+				, "private": 0
+				, "access_token": "your_token"
+			}
+		}).then(data => {
+			console.log('testURL data', data);
+			testURL();
+		})
+		.catch(error => {
+			console.log('testURL error', error);
+		});
+	vkBridge.getShortLink('https://vk.com/dev/utils.getShortLink', 0)
 		.then(data => {
 			console.log('testURL data', data);
 			testURL();
