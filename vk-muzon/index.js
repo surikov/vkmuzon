@@ -39,9 +39,10 @@ function testURL() {
 			, "request_id": "32test"
 			, "params": {
 				"user_ids": "1"
+				, "v":"5.122"
+				, "access_token": "your_token"
 				, "url": "https://vk.com/dev/utils.getShortLink"
 				, "private": 0
-				, "access_token": "your_token"
 			}
 		}).then(data => {
 			console.log('testURL data', data);
