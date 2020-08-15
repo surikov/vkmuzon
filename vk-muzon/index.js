@@ -1134,9 +1134,9 @@ RiffShareFlat.prototype.init = function () {
 	this.storeTracks = [];
 	}*/
 
-	if (this.audioContext) { 
+	//if (this.audioContext) { 
 		//
-	} else {
+	//} else {
 		this.setupInput();
 		var AudioContextFunc = window.AudioContext || window.webkitAudioContext;
 		this.audioContext = new AudioContextFunc();
@@ -1183,15 +1183,15 @@ RiffShareFlat.prototype.init = function () {
 			this.player.adjustPreset(this.audioContext, this.trackInfo[i].sound);
 		}
 
-		setInterval(riffshareflat.moveBeatCounter, 100);
+		//setInterval(riffshareflat.moveBeatCounter, 100);
 
-	}
+	//}
 
 
 
 
 	this.resetSize();
-	//setInterval(riffshareflat.moveCounter, 100);
+	setInterval(riffshareflat.moveCounter, 100);
 
 	this.loadState();
 
@@ -2169,11 +2169,13 @@ RiffShareFlat.prototype.addSmallTiles = function (left, top, width, height) {
 			vkBridge.send('VKWebAppShare', { "link": url })
 				.then(data => {
 					console.log('vkBridge data', data);
-					riffshareflat.init();
+					//riffshareflat.init();
+					riffshareflat.saveState();
 				})
 				.catch(error => {
 					console.log('vkBridge error', error);
-					riffshareflat.init();
+					//riffshareflat.init();
+					riffshareflat.saveState();
 				});
 
 			//vkDoShareURL(url);
