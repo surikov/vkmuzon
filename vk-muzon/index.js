@@ -15,7 +15,8 @@ function startApp() {
 			console.log('vkBridge data', data);
 			console.log('vkBridge', vkBridge);
 			//testURL();
-			vkBridge.send("VKWebAppGetAuthToken", { "app_id": 7562667, "scope": "" });
+			console.log('location', location);
+			//vkBridge.send("VKWebAppGetAuthToken", { "app_id": 7562667, "scope": "" });
 		})
 		.catch(error => {
 			console.log('vkBridge error', error);
@@ -53,7 +54,7 @@ function testURL() {
 			}
 		}).then(data => {
 			console.log('testURL data', data);
-			testURL();
+			//testURL();
 		})
 		.catch(error => {
 			console.log('testURL error', error);
