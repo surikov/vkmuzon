@@ -33,13 +33,13 @@ function startApp() {
 }
 function testURL() {
 	console.log('testURL');
-	bridge.send("VKWebAppCallAPIMethod"
+	vkBridge.send("VKWebAppCallAPIMethod"
 		, {
 			"method": "util.getShortLink"
 			, "request_id": "32test"
 			, "params": {
 				"user_ids": "1"
-				, "url": "google.ru"
+				, "url": "https://vk.com/dev/utils.getShortLink"
 				, "private": 0
 				, "access_token": "your_token"
 			}
@@ -50,14 +50,14 @@ function testURL() {
 		.catch(error => {
 			console.log('testURL error', error);
 		});
-	vkBridge.getShortLink('https://vk.com/dev/utils.getShortLink', 0)
+	/*vkBridge.getShortLink('https://vk.com/dev/utils.getShortLink', 0)
 		.then(data => {
 			console.log('testURL data', data);
 			testURL();
 		})
 		.catch(error => {
 			console.log('testURL error', error);
-		});
+		});*/
 }
 function readStringFromWebDB(name, ondone) {
 	try {
