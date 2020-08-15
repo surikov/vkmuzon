@@ -31,7 +31,7 @@ function startApp() {
 			}
 		}
 		if (e.detail.type === 'VKWebAppAccessTokenReceived') {
-			vk_access_token=e.detail.access_token;
+			vk_access_token=e.detail.data.access_token;
 			testURL();
 		}
 	});
