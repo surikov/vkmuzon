@@ -8,9 +8,13 @@ function startApp() {
 		//riffshareflat.init();
 
 	};*/
-	vkBridge.send('VKWebAppInit').then(data => {
-		console.log('vkBridge data', data);
-	})
+	console.log('vkBridge', vkBridge);
+	vkBridge.send('VKWebAppInit')
+		.then(data => {
+			console.log('vkBridge data', data);
+			console.log('vkBridge', vkBridge);
+			testURL();
+		})
 		.catch(error => {
 			console.log('vkBridge error', error);
 		});
@@ -27,7 +31,17 @@ function startApp() {
 	});
 
 }
-
+function testURL() {
+	console.log('testURL');
+	vkBridge.getShortLink('https://vk.com/dev/utils.getShortLink',0)
+		.then(data => {
+			console.log('testURL data', data);
+			testURL();
+		})
+		.catch(error => {
+			console.log('testURL error', error);
+		});
+}
 function readStringFromWebDB(name, ondone) {
 	try {
 		var database = getWebDB();
