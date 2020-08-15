@@ -33,7 +33,7 @@ function startApp() {
 }
 function testURL() {
 	console.log('testURL');
-	vkBridge.send("VKWebAppCallAPIMethod"
+	/*vkBridge.send("VKWebAppCallAPIMethod"
 		, {
 			"method": "util.getShortLink"
 			, "request_id": "32test"
@@ -50,15 +50,8 @@ function testURL() {
 		})
 		.catch(error => {
 			console.log('testURL error', error);
-		});
-	/*vkBridge.getShortLink('https://vk.com/dev/utils.getShortLink', 0)
-		.then(data => {
-			console.log('testURL data', data);
-			testURL();
-		})
-		.catch(error => {
-			console.log('testURL error', error);
 		});*/
+	vkBridge.send("VKWebAppGetAuthToken", { "app_id": 7562667, "scope": "" });
 }
 function readStringFromWebDB(name, ondone) {
 	try {
