@@ -530,6 +530,7 @@ function encodeState() {
 		txt = txt + '-' + ireplacements;
 	} catch (ex) {
 		console.log(ex);
+		txt=txt+ex.message;
 	}
 	//console.log(txt);
 	return txt;
