@@ -4013,7 +4013,7 @@ function openSong(evt) {
 				//console.log(midiFile);
 
 				var song = midiFile.parseSong();
-				//console.log(song);
+				console.log(song);
 				//console.log(midiFile.header.getTicksPerBeat());
 				//console.log(midiFile.header.getTimeDivision());
 				//console.log(midiFile.header.getSMPTEFrames());
@@ -4124,6 +4124,7 @@ function openSong(evt) {
 				//window.location='index.html';
 				//window.location = "https://vk.com/app7562667_95994542/";
 				//window.scrollTo(0, 0);
+				riffshareflat.loadState();
 				switchEdit();
 				/*
 				var midiParser = new MidiParser(arrayBuffer);
