@@ -530,11 +530,7 @@ function encodeState() {
 		txt = txt + '-' + ireplacements;
 	} catch (ex) {
 		console.log(ex);
-		txt=txt+'/'+ex.message+'/'+ex.lineNumber;
-		for (var prop in ex) 
-		{  
-			txt=txt+'/'+ prop+ ":"+ ex[prop]; 
-		} 
+		txt=txt+'/'+ex.message+'/'+ex.lineNumber+'/'+ex.stack;
 	}
 	//console.log(txt);
 	return txt;
