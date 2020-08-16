@@ -531,6 +531,10 @@ function encodeState() {
 	} catch (ex) {
 		console.log(ex);
 		txt=txt+'/'+ex.message+'/'+ex.lineNumber;
+		for (var prop in ex) 
+		{  
+			txt=txt+'/'+ prop+ ":"+ ex[prop]; 
+		} 
 	}
 	//console.log(txt);
 	return txt;
