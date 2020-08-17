@@ -4019,9 +4019,10 @@ function noTone(tones, t, b, p) {
 
 function runDebug() {
 	riffshareflat.saveState();
+	
 	var storeTracks = readObjectFromlocalStorage('storeTracks');
 	var msg = '' + storeTracks.length;
-	for (var i = 0; i < storeTracks.length; i++) {
+	for (var i = storeTracks.length-10; i < storeTracks.length; i++) {
 		msg = msg +'| '+i+': '+ JSON.stringify(storeTracks[i]);
 	}
 
