@@ -4022,7 +4022,7 @@ function runDebug() {
 	var storeTracks = readObjectFromlocalStorage('storeTracks');
 	var msg = '' + storeTracks.length;
 	for (var i = 0; i < storeTracks.length; i++) {
-		msg = msg +'| '+ JSON.stringify(storeTracks[i]);
+		msg = msg +'| '+i+': '+ JSON.stringify(storeTracks[i]);
 	}
 
 	alert(msg);
