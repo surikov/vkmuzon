@@ -4008,7 +4008,9 @@ function noTone(tones, t, b, p) {
 	}
 	return true;
 }
-
+function runDebug(){
+	alert("debug");
+}
 function openSong(evt) {
 	console.log("openSong v2", evt);
 	//console.log(encodeState());
